@@ -3,12 +3,13 @@ import { useSpring, animated as a } from 'react-spring';
 
 import * as Functions from '../../utils/functions';
 import * as Constants from '../../utils/constants';
-import styles from './Genre.css';
+import './Genre.css';
 
-const Genre = ( props ) => {
-    const [ isSelected, set ] = useState( props.isSelected );
+const Genre = ( props: any ) => {
+    const [ isSelected, setIsSelected ] = useState( props.isSelected );
     const toggleSelected = () => {
-        set( state => !state );
+        //set( state => !state );
+        setIsSelected( !isSelected );
     };
 
     return (

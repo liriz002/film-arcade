@@ -1,0 +1,89 @@
+.Genre-Card {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    will-change: transform, opacity;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Card {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 6px;
+    width: 60px;
+    height: 60px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.Card:hover {
+    transform: translateY(-3px);
+    transition: 0.4s transform;
+}
+
+.Genre-Image {
+    height: 45px;
+    width: 52px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.Genre-Label {
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+    top: 3px;
+}
+
+.Unselected-Card {
+    border-color: #fafafa
+}
+
+.Selected-Card {
+    border-color: #36a3eb;
+}
+
+.Genre-Container {
+    width: 20%;
+    display: inline-block;
+    margin: 0px 3px 0 3px;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+  }
+
+.ReactModal__Overlay hr {
+border-top-style: none;
+}
+
+.ReactModal__Overlay--after-open{
+opacity: 1;
+background-color: rgba(0, 0, 0, 0.80) !important;
+}
+
+.ReactModal__Overlay--before-close{
+opacity: 0;
+}
+
+.ReactModal__Content {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+#Genres-Modal {
+    background-color: #fafafa !important;
+    width: 33%;
+    height: 400px;
+}
