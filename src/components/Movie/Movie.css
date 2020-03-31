@@ -1,0 +1,69 @@
+.Movie-Backdrop {
+    background-image: linear-gradient(to left, transparent 80%, black 100%),
+     linear-gradient(to right, transparent 80%, black 100%),
+     linear-gradient(to top, transparent 70%, black 100%),
+     linear-gradient(to bottom, transparent 80%, black 100%),
+      url('https://image.tmdb.org/t/p/original/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg');
+    background-size: cover;
+}
+
+.Movie-Backdrop-Overlay {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.60);
+}
+
+#Movie-Container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 2%;
+    border-radius: 40px;
+    width: 60%;
+    /*background-color: #131313;*/
+    background: transparent;
+    color: white;
+}
+
+#Movie-Poster {
+    width: 300px;
+    height: 450px;
+    border-radius: 5px;
+}
+
+#Movie-Poster-Container {
+    float: left;
+    width: 50%;
+}
+
+#Movie-Details-Container {
+    float: right;
+    width: 50%;
+    text-align: left;
+}
+
+#Movie-Details-Container h2 {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0px;
+    font-size: 2.0em;
+    position: relative;
+    bottom: 10px
+}
+
+#Trailer-Button {
+    background: transparent;
+    border: 1px solid lightgrey;
+    font-weight: bold;
+    color: lightgrey;
+}
+
+.Rating-Progress-Bar {
+    width: 40px !important;
+}
+
+.CircularProgressbar-text {
+    font-weight: bold;
+}

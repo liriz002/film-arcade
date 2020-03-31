@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as Action from '../actions/actions';
+import * as Actions from '../actions/actions';
 
 const initialState = {
     counter: 0,
@@ -8,10 +8,11 @@ const initialState = {
 
 const globalProps = ( state = initialState, action: any ) => {
     switch ( action.type ) {
-        case Action.INCREMENT_ASYNC:
+        case Actions.INCREMENT_ASYNC:
             console.log( 'incrementing...' );
             return { ...state, counter: state.counter + 1 };
-        case Action.UPDATE_SHOW_GENRES_MODAL:
+        case Actions.UPDATE_SHOW_GENRES_MODAL:
+            console.log('genres modal');
             return { ...state, showGenresModal: action.show };
         default:
             return state;
