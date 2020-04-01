@@ -1,4 +1,6 @@
+/*
 .Movie-Backdrop {
+
     background-image: linear-gradient(to left, transparent 80%, black 100%),
      linear-gradient(to right, transparent 80%, black 100%),
      linear-gradient(to top, transparent 70%, black 100%),
@@ -6,11 +8,12 @@
       url('https://image.tmdb.org/t/p/original/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg');
     background-size: cover;
 }
+*/
 
 .Movie-Backdrop-Overlay {
     height: 100vh;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.60);
+    background-color: rgba(0, 0, 0, 0.70);
 }
 
 #Movie-Container {
@@ -30,7 +33,7 @@
 #Movie-Poster {
     width: 300px;
     height: 450px;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 #Movie-Poster-Container {
@@ -47,7 +50,7 @@
 #Movie-Details-Container h2 {
     font-weight: bold;
     text-transform: uppercase;
-    margin-top: 0px;
+    margin: 0px;
     font-size: 2.0em;
     position: relative;
     bottom: 10px
@@ -66,4 +69,25 @@
 
 .CircularProgressbar-text {
     font-weight: bold;
+}
+
+#Genres {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+.Genre-Divider {
+    color: grey;
+}
+
+#Movie-Overview {
+    letter-spacing: 0.5px;
+    line-height: 22px;
+}
+
+#Runtime {
+    margin-top: 5px;
+    color: lightgrey;
 }

@@ -1,35 +1,42 @@
 import { combineReducers } from 'redux';
 import * as Actions from '../actions/actions';
 
-const initialState = {
+const initialGlobalProps = {
     counter: 0,
     showGenresModal: false
 };
 
-const globalProps = ( state = initialState, action: any ) => {
+const globalProps = ( state = initialGlobalProps, action: any ) => {
     switch ( action.type ) {
         case Actions.INCREMENT_ASYNC:
-            console.log( 'incrementing...' );
             return { ...state, counter: state.counter + 1 };
         case Actions.UPDATE_SHOW_GENRES_MODAL:
-            console.log('genres modal');
             return { ...state, showGenresModal: action.show };
         default:
             return state;
     }
 };
 
-const initialData = { 
-
+const initialMovieData = {
+    currentMovieIndex: 0, 
+    movies: []
 };
 
-const reducer2 = ( state = initialData, action: any ) => {
-    return state;
+const movieData = ( state = initialMovieData, action: any ) => {
+    switch( action.type ) {
+        case Actions.UPDATE_MOVIES:
+            return { ...state, movies: action.movies };
+        case Actions.INCREMENT_CURRENT_MOVIE_INDEX:
+            console.log('incrementing...');
+            return { ...state, currentMovieIndex: state.currentMovieIndex + 1 };
+        default:
+            return state;
+    }
 };
 
 const allReducers = combineReducers({
     globalProps,
-    reducer2
+    movieData
 });
 
 export default allReducers;

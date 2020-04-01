@@ -1,0 +1,16 @@
+#Cast-Member-Image {
+    height: 75px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+#Cast-Member-Name {
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+}
+
+.Cast-Member {
+    display: inline-block;
+    width: 15%;
+}

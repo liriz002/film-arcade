@@ -1,5 +1,6 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
 import * as actions from '../store/actions/actions';
+// import * as moviesJSON from '../movies.json';
 
 const delay = ( ms: number ) => new Promise( res => setTimeout( res, ms ) );
 
@@ -16,20 +17,20 @@ export function *watchIncrementAsync() {
     yield takeEvery( 'INCREMENT_ASYNC', incrementAsync );
 }
 
-export function *fetchSomething() {
-    yield delay( 5000 );
-    const json = yield fetch('https://jsonplaceholder.typicode.com/todos/1')
-                    .then( response => response.json());
-    
-    yield put({ type: actions.INCREMENT_ASYNC });
-    console.log( json );
+export function *fetchMovies() {
+    const moviesJSON = yield fetch('https://us-central1-squadflick.cloudfunctions.net/getTheaterAtHomeMovies')
+                    .then( dataWrappedByPromise => dataWrappedByPromise.json() )
+                    .then( json => json );
+
+    yield put({ type: actions.UPDATE_MOVIES, movies: moviesJSON });
+    console.log('loaded movies');
 }
 
 export default function *rootSaga() {
     yield all([
         //helloSaga(),
         //watchIncrementAsync(),
-        fetchSomething()
+        fetchMovies()
     ]);
 }
 

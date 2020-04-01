@@ -16,3 +16,29 @@ code {
 .Dark-Blue {
   
 }
+
+#root {
+  background-color: black;
+  color: white;
+  /*
+  background: url('https://i.imgur.com/tcgVHdh.png');
+  height: 100vh;
+  background-position: 0px 0px;
+  background-repeat: repeat;
+  background-size: cover;
+
+
+    animation: animatedBackground 60s linear infinite;
+    */
+}
+
+/*
+@keyframes animatedBackground {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+*/

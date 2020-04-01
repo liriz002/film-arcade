@@ -6,6 +6,7 @@ Button {
     border-radius: 20px;
     font-family: 'Poppins';
     border: none;
+    outline: 0;
 }
 
 Button:hover {
