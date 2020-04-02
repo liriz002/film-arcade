@@ -1,0 +1,22 @@
+.Posters-Container {
+    display: flex !important;
+    align-items: center;
+    overflow-x: scroll;
+    padding: 20px 10px;
+}
+
+
+.Posters-Container .Movie-Poster {
+    margin-right: 15px;
+}
+
+.Posters-Container-Title {
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    position: relative;
+    top: 12px;
+    padding-left: 10px;
+}
