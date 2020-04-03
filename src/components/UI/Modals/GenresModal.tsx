@@ -12,8 +12,13 @@ import { bindActionCreators } from 'redux';
 const GenresModal = ( props: any ) => {
 
     const saveGenres = () => {
-        console.log('save genres');
+
+        props.onUpdateShouldApplyFilter( true );
         props.onUpdateShowGenresModal( false );
+    };
+
+    const addGenre = () => {
+        console.log('added genre');
     };
 
     return (
@@ -24,13 +29,13 @@ const GenresModal = ( props: any ) => {
             { Constants.ALL_GENRES.map(( genre, index ) => {
                 return (
                     <span className="Genre-Container">
-                        <Genre key={ genre } name={ genre } isSelected={ false } />
+                        <Genre key={ genre } name={ genre } isSelected={ props.filterString.includes( genre ) } clicked={ addGenre } />
                     </span>
                 );
             }) }
           </div>
 
-          <Button clicked={ saveGenres } classes="Button1" title="Any Genres" />
+          <Button clicked={ saveGenres } classes="Button1" title={ ( props.filterString == '' ) ? 'All Genres' : 'Apply Genres' } />
         </ReactModal>
     );
 };
@@ -38,13 +43,14 @@ const GenresModal = ( props: any ) => {
 
 function mapStateToProps( state: any ) {
     return {
-
+        filterString: state.movieData.filterString
     };
 }
 
 function mapDispatchToProps( dispatch: any ) {
     return {
-        onUpdateShowGenresModal: ( show: any ) => dispatch({ type: Actions.UPDATE_SHOW_GENRES_MODAL, show: show })
+        onUpdateShowGenresModal: ( show: any ) => dispatch({ type: Actions.UPDATE_SHOW_GENRES_MODAL, show: show }),
+        onUpdateShouldApplyFilter: ( shouldApplyFilter: boolean ) => dispatch( Actions.updateShouldApplyFilter( shouldApplyFilter ) )
     };
 }
 

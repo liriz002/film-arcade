@@ -30,6 +30,12 @@
     color: white;
 }
 
+#Home-Button {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    bottom: 0px;
+}
+
 #Movie-Poster {
     width: 300px;
     height: 450px;

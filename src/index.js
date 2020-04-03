@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 
@@ -12,10 +12,10 @@ import rootSaga from './sagas/sagas.tsx';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore( 
-  allReducers,
-  applyMiddleware( sagaMiddleware )
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore( allReducers, /* preloadedState, */ composeEnhancers(
+  applyMiddleware( sagaMiddleware ),
+));
 
    sagaMiddleware.run( rootSaga );
 

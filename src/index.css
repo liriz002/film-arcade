@@ -5,17 +5,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#Home {
+  margin-top: 60px;
+}
+
 code {
   font-family: 'Poppins' !important;
 }
 
-.Light-Blue {
-  
-}
 
-.Dark-Blue {
-  
-}
+
 
 #root {
   color: white;

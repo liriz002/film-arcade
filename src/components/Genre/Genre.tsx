@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { useSpring, animated as a } from 'react-spring';
 
 import * as Functions from '../../utils/functions';
 import * as Constants from '../../utils/constants';
+import * as actions from '../../store/actions/actions';
 import './Genre.css';
 
 const Genre = ( props: any ) => {
     const [ isSelected, setIsSelected ] = useState( props.isSelected );
     const toggleSelected = () => {
-        //set( state => !state );
+
+        if ( isSelected ) {
+            // Removing a genre from the filter string
+            props.onUpdateFilterString( props.filterString.replace( props.name + "|", '' ));
+        } else {
+            // Adding a genre to the filter string
+            props.onUpdateFilterString( props.filterString + props.name + "|" )
+        }
+
+        // In any case, we invert the selected status of the genre
         setIsSelected( !isSelected );
     };
 
@@ -20,7 +31,19 @@ const Genre = ( props: any ) => {
     );
 }
 
-export default Genre;
+function mapStateToProps( state: any ) {
+    return {
+        filterString: state.movieData.filterString
+    };
+}
+
+function mapDispatchToProps( dispatch: any ) {
+    return {
+        onUpdateFilterString: ( filterStr: string ) => dispatch( actions.updateFilterString( filterStr ) )
+    }
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )( Genre );
 
 /*
 <ReactCardFlip isFlipped={ isSelected } flipDirection="horizontal">

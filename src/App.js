@@ -1,58 +1,69 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/actions';
 
 import Movie from './components/Movie/Movie';
 import PostersContainer from './components/Movie/PostersContainer/PostersContainer';
 import GenresModal from './components/UI/Modals/GenresModal';
-import Button from './components/UI/Button/Button';
+import NavigationBar from './components/UI/NavigationBar/NavigationBar';
+import FullModal from './components/UI/Modals/FullModal';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'; 
 
 import './App.css';
 
 const App = ( props ) => {
+  // Methods
+  useEffect(() => {
+    // We apply filters if needed
+    if ( props.shouldApplyFilter ) {
+      let genreFilter = props.filterString;
+      let allMovies = JSON.parse( JSON.stringify( props.movies ) );
+      let allAtTheaterMovies = allMovies.splice( 0, 10 );
+      let allLeftTheaterMovies = allMovies.splice( 0 );
 
-  const incrementAsync = () => {
-    props.incrementAsync();
-  }
+      // If the filter string is empty, we show all genres to the user
+      if( props.filterString == "" ) {
+        props.onUpdateMovies( props.movies, allAtTheaterMovies, allLeftTheaterMovies );
+      } else {
+          // Else, we have a filter to apply, so we apply the genre(s) filter to both lists
+          // We apply the genre filter to both lists
+          let atTheater = allAtTheaterMovies.filter( ( movie ) => genreFilter.includes( movie.genre1Name ) ||
+          genreFilter.includes( movie.genre2Name ) ||
+          genreFilter.includes( movie.genre3Name ) ||
+          genreFilter.includes( movie.genre4Name ) );
 
-  // Updates the state to show the genres modal
-  const showGenresModal = () => {
-    props.onUpdateShowGenresModal( true );
-  }
+    let leftTheater = allLeftTheaterMovies.filter( ( movie ) => genreFilter.includes( movie.genre1Name ) ||
+          genreFilter.includes( movie.genre2Name ) ||
+          genreFilter.includes( movie.genre3Name ) ||
+          genreFilter.includes( movie.genre4Name ) );
 
-  /*
-  let posters;
-
-  if ( this.props.movies.length > 0 ) {
-    posters = <div>{ this.props.movies.map(() => {
-      return (
-        <MoviePoster />
-      )
-    }) } </div>
-  }
-  */
-  
+          // Then, we update these lists
+          props.onUpdateMovies( props.movies, atTheater, leftTheater );
+      }
+                                                  
+      // In any case, we set shouldApplyFilter to false
+      props.onUpdateShouldApplyFilter( false );
+    }
+  });
 
   return (
 
     <Router>
     <div className="App">
-      <Switch>
-        <Route path="/movie">
-            <Movie />
-        </Route>
-        <Route path="/">
-          <div id="Home">
-            <h1 style={{ marginTop: '0px' }}>The Film Arcade</h1>
-            <PostersContainer title="At-Theater" movies={ props.movies.splice(0, 10) } />
-            <PostersContainer title="Recently Left Theaters" movies={ props.movies.splice(0) } />
+      <div className="Content">
+        <Switch>
+          <Route path="/movie" component={ Movie }>
+          </Route>
+          <Route path="/">
+          <NavigationBar />
+            <div id="Home">
+            <PostersContainer title="At-Theater" movies={ props.atTheaterMovies } />
+            <PostersContainer title="Recently Left Theaters" movies={ props.leftTheaterMovies } />
             <GenresModal isOpen={ props.showGenresModal } />
-            <p>{ props.counter }</p>
-            <Button clicked={ showGenresModal } classes="Button1" title="Filter Genres">Saga Test</Button>
-          </div>
-        </Route>
-      </Switch>
+            </div>
+          </Route>
+        </Switch>
+      </div>
     </div>
 
     </Router>
@@ -63,16 +74,24 @@ function mapStateToProps( state ) {
   return {
     counter: state.globalProps.counter,
     showGenresModal: state.globalProps.showGenresModal,
-    movies: state.movieData.movies
+    movies: state.movieData.movies,
+    atTheaterMovies: state.movieData.atTheaterMovies,
+    leftTheaterMovies: state.movieData.leftTheaterMovies,
+    shouldApplyFilter: state.movieData.shouldApplyFilter,
+    filterString: state.movieData.filterString
   };  
 }
 
 function mapDispatchToProps( dispatch ) {
   return {
-    incrementAsync: () => dispatch( actions.incrementAsync() ),
-    onUpdateShowGenresModal: ( show ) => dispatch( actions.updateShowGenresModal( show ) )
+    onUpdateShowGenresModal: ( show ) => dispatch( actions.updateShowGenresModal( show ) ),
+    onUpdateMovies: ( movies, atTheaterMovies, leftTheaterMovies ) => dispatch( actions.updateMovies( movies, atTheaterMovies, leftTheaterMovies ) ),
+    onUpdateShouldApplyFilter: ( shouldApplyFilter ) => dispatch( actions.updateShouldApplyFilter( shouldApplyFilter ) )
   };
 }
 
 
 export default connect( mapStateToProps, mapDispatchToProps )( App );
+
+
+//             <FullModal />

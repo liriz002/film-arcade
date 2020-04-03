@@ -1,0 +1,40 @@
+.Navigation-Bar {
+    background-image: linear-gradient(to right, #53f, #0BD1FF);
+    padding: 15px 0px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#Nav-Logo {
+    float: left;
+    position: relative;
+    left: 35px;
+}
+
+#Filters-Button {
+    float: right;
+    position: relative;
+    right: 35px;
+    bottom: 8px;
+    background-color: #ffc107;
+    color: black;
+}
+
+#Logo-Image {
+    height: 40px;
+    width: auto;
+    position: relative;
+    bottom: 5px;
+}
+
+#App-Title {
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    position: relative;
+    bottom: 15px;
+    left: 15px;
+}
