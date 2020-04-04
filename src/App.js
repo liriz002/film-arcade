@@ -7,6 +7,7 @@ import PostersContainer from './components/Movie/PostersContainer/PostersContain
 import GenresModal from './components/UI/Modals/GenresModal';
 import NavigationBar from './components/UI/NavigationBar/NavigationBar';
 import FullModal from './components/UI/Modals/FullModal';
+import Voting from './containers/Voting/Voting';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'; 
 
 import './App.css';
@@ -50,9 +51,12 @@ const App = ( props ) => {
 
     <Router>
     <div className="App">
-      <div className="Content">
+      <div className="">
         <Switch>
           <Route path="/movie">
+          </Route>
+          <Route path="/movies-voting">
+            <Voting />
           </Route>
           <Route path="/">
           <NavigationBar isOpen={ !props.showMovieModal } />

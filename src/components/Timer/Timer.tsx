@@ -1,0 +1,44 @@
+import React, { Component } from 'react';
+import * as Constants from '../../utils/constants';
+import { render } from '@testing-library/react';
+
+type Props = { }
+type State = { secondsLeft: number }
+
+class Timer extends Component<Props, State> {
+    timerID: any;
+
+    constructor( props: any ) {
+        super( props );
+        this.state = { secondsLeft: Constants.Global.VOTING_COUNTDOWN_SECONDS };
+    }
+
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            Constants.Global.VOTING_COUNTDOWN_TICK_MILLISECONDS
+        )
+    }
+
+    componentWillUnmount() {
+        console.log('will unmount');
+        clearInterval( this.timerID );
+    }
+
+    // Reduces a second from the timer countdown. If it reaches 0, we stop the timer
+    tick = () => {
+        if ( this.state.secondsLeft == 0 ) {
+            clearInterval( this.timerID );
+        } else {
+            // this.setState({ secondsLeft: this.state.secondsLeft - 1 });
+        }
+    }
+
+    render() {
+        return (
+        <div className="Timer">{ this.state.secondsLeft }</div>
+        )
+    }
+};
+
+export default Timer;

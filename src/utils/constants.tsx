@@ -1,5 +1,7 @@
 export const Global = {
-    MODALS_ANIMATION_TIME_IN_MS: 500
+    MODALS_ANIMATION_TIME_IN_MS: 500,
+    VOTING_COUNTDOWN_SECONDS: 10,
+    VOTING_COUNTDOWN_TICK_MILLISECONDS: 1000
 };
 
 export const Animations = { };

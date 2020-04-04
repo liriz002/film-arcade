@@ -1,0 +1,45 @@
+.Left-Movie {
+    background: linear-gradient(to left, transparent 80%, black 100%), linear-gradient(to right, transparent 80%, black 100%), linear-gradient(to top, transparent 70%, black 100%), linear-gradient(to bottom, transparent 80%, black 100%), url('https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/qfQ78ZKiouoM2yhAnfNblp9ijQE.jpg');
+}
+
+.Right-Movie {
+    background: linear-gradient(to left, transparent 80%, black 100%), linear-gradient(to right, transparent 80%, black 100%), linear-gradient(to top, transparent 70%, black 100%), linear-gradient(to bottom, transparent 80%, black 100%), url('https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/xFxk4vnirOtUxpOEWgA1MCRfy6J.jpg');
+}
+
+.Movie-Voting-Container {
+    height: 100vh;
+    width: 50%;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+}
+
+.Movie-Voting-Poster {
+    height: 400px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.Left-Movie .Movie-Voting-Details {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.Right-Movie .Movie-Voting-Details {
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    transform: translate(50%, -50%);
+}
+
+.Timer {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 2.0em;
+}

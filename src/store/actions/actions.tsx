@@ -4,6 +4,7 @@ export const UPDATE_MOVIES = 'UPDATE_MOVIES';
 export const UPDATE_CURRENT_MOVIE_INDEX = 'UPDATE_CURRENT_MOVIE_INDEX';
 export const UPDATE_FILTER_STRING = 'UPDATE_FILTER_STRING';
 export const UPDATE_SHOULD_APPLY_FILTER = 'UPDATE_SHOULD_APPLY_FILTER';
+export const UPDATE_VOTING_MOVIES = 'UPDATE_VOTING_MOVIES';
 
 export function updateShowGenresModal( show: boolean ) {
     return {
@@ -40,11 +41,18 @@ export function updateFilterString( filterString: string ) {
         type: UPDATE_FILTER_STRING,
         filterString: filterString
     };
-}
+};
 
 export function updateShouldApplyFilter( shouldApplyFilter: boolean ) {
     return {
         type: UPDATE_SHOULD_APPLY_FILTER,
         shouldApplyFilter: shouldApplyFilter
-    }
-}
+    };
+};
+
+export function updateVotingMovies( movies: any ) {
+    return {
+        type: UPDATE_VOTING_MOVIES,
+        movies: movies
+    };
+};

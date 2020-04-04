@@ -23,6 +23,16 @@
     color: black;
 }
 
+#Voting-Btn {
+    float: right;
+    position: relative;
+    right: 35px;
+    bottom: 8px;
+    background-color: #4F43FF;
+    color: white;
+    margin-right: 10px;
+}
+
 #Logo-Image {
     height: 40px;
     width: auto;
