@@ -22,7 +22,8 @@ const Movie = ( props: any ) => {
     // Functions
     // Sets the state to send the user home
     const goHome = () => {
-        setState({ goHome: true });
+        // setState({ goHome: true });
+        props.onUpdateShowMovieModal( false );
     };
 
     // If the user clicked on Home or if there are no movies, we return to the homepage
@@ -32,9 +33,10 @@ const Movie = ( props: any ) => {
         )
     }
 
-    let movieIndex = props.location.state.movieIndex;
+    let movieIndex = props.movieIndex;
     let currentMovie = props.movies[ movieIndex ];
-
+    console.log(movieIndex);
+    console.log(currentMovie);
 
     // const animatedProps = useSpring({ opacity: 1, from: { opacity: 0 } })
 
@@ -50,11 +52,6 @@ const Movie = ( props: any ) => {
             )
         }
     }) }</p>  
-
-    
-    const nextMovie = () => {
-        props.onIncrementCurrentMovieIndex( );
-    };
     
     let HTML;
     if ( currentMovie == null ) {
@@ -84,7 +81,7 @@ const Movie = ( props: any ) => {
                                     <CircularProgressbar
                                     className="Rating-Progress-Bar"
                                     value={ currentMovie.tmdbRating * 10 }
-                                    text={`${ currentMovie.tmdbRating }`}
+                                    text={`${ currentMovie.tmdbRating.toFixed( 1 ) }`}
                                     /* This is important to include, because if you're fully managing the
                                 animation yourself, you'll want to disable the CSS animation. */
                                     styles={buildStyles({ 
@@ -102,7 +99,6 @@ const Movie = ( props: any ) => {
                         <p id="Runtime">{ Functions.getHoursAndMinutesFromMinutes( currentMovie.runtime ) }</p>
                         <p id="Movie-Overview">{ currentMovie.overview }</p>
                         <a href={ currentMovie.trailerURL } target="_blank"><button id="Trailer-Button">Watch Trailer</button></a>
-                        <Button className="Button1" clicked={ nextMovie } title="Next" />
                     </div>
                 </animated.div>
 
@@ -120,14 +116,14 @@ const Movie = ( props: any ) => {
 
 function mapStateToProps( state: any ){
     return {
-        movieIndex: state.movieData.currentMovieIndex,
+        movieIndex: state.globalProps.currentMovieIndex,
         movies: state.movieData.movies
     };
 };
 
 function mapDispatchToProps( dispatch: any ) {
     return {
-        onIncrementCurrentMovieIndex: () => dispatch( actions.incrementCurrentMovieIndex() )
+        onUpdateShowMovieModal: ( show: boolean ) => dispatch( actions.updateShowMovieModal( show )),
     };
 };
 

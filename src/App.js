@@ -52,14 +52,15 @@ const App = ( props ) => {
     <div className="App">
       <div className="Content">
         <Switch>
-          <Route path="/movie" component={ Movie }>
+          <Route path="/movie">
           </Route>
           <Route path="/">
-          <NavigationBar />
+          <NavigationBar isOpen={ !props.showMovieModal } />
             <div id="Home">
             <PostersContainer title="At-Theater" movies={ props.atTheaterMovies } />
             <PostersContainer title="Recently Left Theaters" movies={ props.leftTheaterMovies } />
             <GenresModal isOpen={ props.showGenresModal } />
+            <FullModal isOpen={ props.showMovieModal } />
             </div>
           </Route>
         </Switch>
@@ -74,6 +75,7 @@ function mapStateToProps( state ) {
   return {
     counter: state.globalProps.counter,
     showGenresModal: state.globalProps.showGenresModal,
+    showMovieModal: state.globalProps.showMovieModal,
     movies: state.movieData.movies,
     atTheaterMovies: state.movieData.atTheaterMovies,
     leftTheaterMovies: state.movieData.leftTheaterMovies,

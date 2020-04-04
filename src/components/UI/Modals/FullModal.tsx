@@ -3,10 +3,10 @@ import ReactModal from 'react-modal';
 
 import Movie from '../../Movie/Movie';
 
-const FullModal = () => {
+const FullModal = ( props: any ) => {
     return (
         <div>
-            <ReactModal id="Full-Modal" isOpen={ true }>
+            <ReactModal id="Full-Modal" isOpen={ props.isOpen } closeTimeoutMS={ 500 }>
                 <Movie />
             </ReactModal>
         </div>
