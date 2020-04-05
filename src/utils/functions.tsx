@@ -24,7 +24,7 @@ export const getHoursAndMinutesFromMinutes = ( totalMinutes: number ) => {
 };
 
 // Returns a string that contains the proper HTML for showing genres
-export const buildGenresHTML = ( genre1: String, genre2: String, genre3: String ) => {
+export const buildGenresHTML = ( genre1: String, genre2: String, genre3: String, genre4: String ) => {
     let genresHTML = "";
 
     if ( genre1 ) {
@@ -39,10 +39,14 @@ export const buildGenresHTML = ( genre1: String, genre2: String, genre3: String 
         genresHTML += '<span className="Genre-Divider"></span>' + genre3;
     }
 
+    if ( genre4 ) {
+        genresHTML += '<span className="Genre-Divider"></span>' + genre4;
+    }
+
     return genresHTML;
 }
 
-export const getGenresArray = ( genre1: string, genre2: string, genre3: string ) => {
+export const getGenresArray = ( genre1: string, genre2: string, genre3: string, genre4: string ) => {
     let genresArr = [];
 
     if ( genre1 ) {
@@ -55,6 +59,10 @@ export const getGenresArray = ( genre1: string, genre2: string, genre3: string )
 
     if ( genre3 ) {
         genresArr.push( genre3 );
+    }
+
+    if ( genre4 ) {
+        genresArr.push( genre4 );
     }
 
     return genresArr;

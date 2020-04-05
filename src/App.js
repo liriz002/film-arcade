@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from './store/actions/actions';
 
 import Movie from './components/Movie/Movie';
+import Winner from './components/Movie/Winner/Winner';
 import PostersContainer from './components/Movie/PostersContainer/PostersContainer';
 import GenresModal from './components/UI/Modals/GenresModal';
 import NavigationBar from './components/UI/NavigationBar/NavigationBar';
@@ -58,6 +59,10 @@ const App = ( props ) => {
           <Route path="/movies-voting">
             <Voting />
           </Route>
+          <Route path="/winner">
+            <Winner />
+          </Route>
+          <Route path="/winner" component={ Winner } />
           <Route path="/">
           <NavigationBar isOpen={ !props.showMovieModal } />
             <div id="Home">

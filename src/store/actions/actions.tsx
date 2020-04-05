@@ -5,6 +5,7 @@ export const UPDATE_CURRENT_MOVIE_INDEX = 'UPDATE_CURRENT_MOVIE_INDEX';
 export const UPDATE_FILTER_STRING = 'UPDATE_FILTER_STRING';
 export const UPDATE_SHOULD_APPLY_FILTER = 'UPDATE_SHOULD_APPLY_FILTER';
 export const UPDATE_VOTING_MOVIES = 'UPDATE_VOTING_MOVIES';
+export const UPDATE_WINNING_MOVIE = 'UPDATE_WINNING_MOVIE';
 
 export function updateShowGenresModal( show: boolean ) {
     return {
@@ -56,3 +57,10 @@ export function updateVotingMovies( movies: any ) {
         movies: movies
     };
 };
+
+export function updateWinningMovie( winningMovieIndex: number ) {
+    return {
+        type: UPDATE_WINNING_MOVIE,
+        winningMovieIndex: winningMovieIndex
+    };
+}

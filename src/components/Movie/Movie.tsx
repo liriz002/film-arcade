@@ -41,7 +41,7 @@ const Movie = ( props: any ) => {
     // const animatedProps = useSpring({ opacity: 1, from: { opacity: 0 } })
 
     let genresHTML =      
-    <p id="Genres"> { Functions.getGenresArray( currentMovie.genre1Name, currentMovie.genre2Name, currentMovie.genre3Name ).map(( genre, index ) => {
+    <p id="Genres"> { Functions.getGenresArray( currentMovie.genre1Name, currentMovie.genre2Name, currentMovie.genre3Name, currentMovie.genre4Name ).map(( genre, index ) => {
         if ( index == 0) {
             return (
                 <span>{ genre } </span>

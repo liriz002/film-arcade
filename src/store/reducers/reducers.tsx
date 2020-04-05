@@ -5,7 +5,8 @@ const initialGlobalProps = {
     counter: 0,
     showGenresModal: false,
     showMovieModal: false,
-    currentMovieIndex: 0
+    currentMovieIndex: 0,
+    winningMovieIndex: -1
 };
 
 const globalProps = ( state = initialGlobalProps, action: any ) => {
@@ -16,6 +17,8 @@ const globalProps = ( state = initialGlobalProps, action: any ) => {
             return { ...state, currentMovieIndex: action.movieIndex };
         case Actions.UPDATE_SHOW_MOVIE_MODAL:
             return { ...state, showMovieModal: action.show };
+        case Actions.UPDATE_WINNING_MOVIE:
+            return { ...state, winningMovieIndex: action.winningMovieIndex };
         default:
             return state;
     }
@@ -25,6 +28,7 @@ const initialMovieData = {
     movies: [],
     atTheaterMovies: [],
     leftTheaterMovies: [],
+    votingMovies: [],
     filterString: "",
     shouldApplyFilter: false
 };
@@ -37,19 +41,6 @@ const movieData = ( state = initialMovieData, action: any ) => {
             return { ...state, filterString: action.filterString };
         case Actions.UPDATE_SHOULD_APPLY_FILTER:
             return { ...state, shouldApplyFilter: action.shouldApplyFilter };
-        default:
-            return state;
-    }
-};
-
-const initialVotingData = {
-    votingMovies: [],
-    winningMovieIndex: 0, // index of the movie that's winning so far
-    latestMovieShownIndex: 1, // index of latest movie shown; starts at 1 because you will have at least 2 movies
-};
-
-const voting = ( state = initialVotingData, action: any ) => {
-    switch ( action.type ) {
         case Actions.UPDATE_VOTING_MOVIES:
             return { ...state, votingMovies: action.movies };
         default:
@@ -59,8 +50,7 @@ const voting = ( state = initialVotingData, action: any ) => {
 
 const allReducers = combineReducers({
     globalProps,
-    movieData,
-    voting
+    movieData
 });
 
 export default allReducers;
