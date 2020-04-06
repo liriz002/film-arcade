@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/actions';
 
-import Movie from './components/Movie/Movie';
 import Winner from './components/Movie/Winner/Winner';
 import PostersContainer from './components/Movie/PostersContainer/PostersContainer';
 import GenresModal from './components/UI/Modals/GenresModal';
 import NavigationBar from './components/UI/NavigationBar/NavigationBar';
 import FullModal from './components/UI/Modals/FullModal';
+import MobileModal from './components/UI/Modals/MobileModal';
 import SuddenDeathModal from './components/UI/Modals/SuddenDeathModal';
 import StreamingInfo from './components/UI/Modals/StreamingInfo';
 import Voting from './containers/Voting/Voting';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom'; 
 
+import * as Constants from './utils/constants';
+
 import './App.css';
 
 const App = ( props ) => {
+  const [ windowWidth, setWindowWidth ] = useState( window.innerWidth );
+
   // Methods
   useEffect(() => {
     // We apply filters if needed
@@ -50,15 +54,35 @@ const App = ( props ) => {
     }
   });
 
+  useEffect(() => {
+    function setWidth() {
+      setWindowWidth( window.innerWidth );
+    };
+
+    // Add and remove an event listener for resizing
+    window.addEventListener('resize', setWidth);
+
+    return () => {
+      window.removeEventListener('resize', setWidth( window.innerWidth ));
+    }
+  }, []);
+
 
   let redirectToSuddenDeath;
   if ( props.inSuddenDeath ) {
       redirectToSuddenDeath = <Redirect to="/sudden-death" />
   }
 
-  return (
-
+  let mainApp;
+  if ( windowWidth < Constants.Global.MIN_WINDOW_WIDTH ) {
+    mainApp = 
+    <div className="App">
+     <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
+    </div>
+  } else {
+    mainApp = 
     <Router>
+    <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
     <div className="App">
         { redirectToSuddenDeath }
         <Switch>
@@ -87,6 +111,12 @@ const App = ( props ) => {
     </div>
 
     </Router>
+  }
+
+  return (
+    <div>
+      { mainApp }
+    </div>
   );
 }
 

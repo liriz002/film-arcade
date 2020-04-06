@@ -90,7 +90,7 @@ opacity: 0;
     height: 470px;
 }
 
-#Genres-Modal, #Sudden-Death-Modal, #Streaming-Info-Modal {
+#Genres-Modal, #Sudden-Death-Modal, #Streaming-Info-Modal, #Mobile-Modal {
     border-radius: 20px !important;
     background-color: #fafafa !important;
 }
@@ -227,7 +227,7 @@ opacity: 0;
 
 #Streaming-Divider {
     position: relative;
-    left: 20px;
+    left: 18px;
     font-weight: bold;
     color: lightgrey;
     font-size: 1.5em;
@@ -237,4 +237,9 @@ opacity: 0;
     font-size: 10px;
     color: grey;
     margin-top: 5px;
+}
+
+#Mobile-Modal {
+    height: 240px;
+    width: 500px;
 }
