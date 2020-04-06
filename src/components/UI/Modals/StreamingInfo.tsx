@@ -2,9 +2,11 @@ import React from 'react';
 import ReactModal from 'react-modal';
 import Button from '../Button/Button';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import * as Actions from '../../../store/actions/actions';
 import * as Constants from '../../../utils/constants';
+import * as Functions from '../../../utils/functions';
 
 const StreamingInfo = ( props: any ) => {
 
@@ -12,9 +14,22 @@ const StreamingInfo = ( props: any ) => {
         props.onUpdateShowStreamingInfoModal( false );
     };
 
-    const openURL = () => {
-        window.open("https://www.vudu.com/content/movies/details/Uncut-Gems/1304658", '_blank');
+    const openURL = ( streamingURL: string ) => {
+        if ( props.redirect ) {
+            window.location.href = streamingURL;
+        } else {
+            window.open(streamingURL, '_blank');
+        }
     }
+
+    if( props.movies.length == 0 ) {
+        return (
+            <Redirect to="/" />
+        );
+    }
+
+    let movieIndex = props.movieIndex;
+    let currentMovie = props.movies[ movieIndex ];
 
     return (
         <ReactModal id="Streaming-Info-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } >
@@ -24,23 +39,23 @@ const StreamingInfo = ( props: any ) => {
             <div className="Modal-Content-Container">
                 <div className="Modal-Section">
                     <div id="Streaming-Poster-Container">
-                    <img className="Streaming-Poster-Image" src="https://image.tmdb.org/t/p/w780/AuGiPiGMYMkSosOJ3BQjDEAiwtO.jpg" />
+                    <img className="Streaming-Poster-Image" src={ currentMovie.posterURL } />
                     </div>
                     <div id="Streaming-Details-Container">
                         <table id="Streaming-Table">
                             <thead>
-                                <tr><td id="Streaming-Type">For Rent</td></tr>
+                                <tr><td id="Streaming-Type">{ currentMovie.reactStreaming.type == 'Rent' ? 'For Rent' : 'For Purchase' }</td></tr>
                             </thead>
                             <tbody>
-                                <td id="Streaming-Price-Icon" onClick={ openURL }>
-                                    <img id="Streaming-Provider-Icon" src="https://images.justwatch.com/icon/146383632/s100" />
+                                <td id="Streaming-Price-Icon" onClick={(  ) => openURL( currentMovie.reactStreaming.URL ) }>
+                                    <img id="Streaming-Provider-Icon" src={ Functions.getProviderImageURL( currentMovie.reactStreaming.provider ) } />
                                     <span id="Streaming-Divider">/</span>
-                                    <span id="Streaming-Price">$4.99</span>
+                                    <span id="Streaming-Price">${ currentMovie.reactStreaming.price }</span>
                                     </td>
                             </tbody>
                         </table>
 
-                        <p id="Price-Guarantee">* This is the lowest price on the Internet to stream 1917.</p>
+                        <p id="Price-Guarantee">* Sometimes, the lowest price is for standard definition. If you're interested in better definitions, look through the different options in the streaming provider.</p>
 
                     </div>
                 </div>
@@ -57,7 +72,8 @@ const StreamingInfo = ( props: any ) => {
 
 function mapStateToProps( state: any ) {
     return {
-
+        movieIndex: state.globalProps.currentMovieIndex,
+        movies: state.movieData.movies
     };
 }
 

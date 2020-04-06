@@ -1,6 +1,6 @@
 // Returns the URL of a genre image
 export const getGenreImageURL = ( name: string, isSelected: boolean ) => {
-    return '/images/' + name + ' - ' + ( isSelected ? 'Colored' : 'Mono' ) + '.png';
+    return '/images/genres/' + name + ' - ' + ( isSelected ? 'Colored' : 'Mono' ) + '.png';
 }
 
 // Returns a string with the number of hours and minutes from a total number of minutes
@@ -22,6 +22,11 @@ export const getHoursAndMinutesFromMinutes = ( totalMinutes: number ) => {
 
     return str;
 };
+
+// Returns a string with a path to a provider icon image
+export const getProviderImageURL = ( name: string ) => {
+    return '/images/providers/' + name.toLowerCase() + '.jpeg';
+}
 
 // Returns a string that contains the proper HTML for showing genres
 export const buildGenresHTML = ( genre1: String, genre2: String, genre3: String, genre4: String ) => {

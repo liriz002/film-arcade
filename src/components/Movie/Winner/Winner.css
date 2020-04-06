@@ -11,14 +11,14 @@
 
 #Animation-1 {
     position: absolute;
-    top: 30%;
-    right: 5%;
+    top: 0%;
+    left: 5%;
 }
 
 #Animation-2 {
     position: absolute;
-    top: 0%;
-    left: 5%;
+    top: 30%;
+    right: 5%;
 }
 
 #Rent-Buy-Btn {

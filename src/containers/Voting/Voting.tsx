@@ -171,7 +171,7 @@ function mapStateToProps( state: any ) {
 
 function mapDispatchToProps( dispatch: any ) {
     return {
-        onUpdateWinningMovie: ( winningMovieIndex: number ) => dispatch( Actions.updateWinningMovie( winningMovieIndex )) 
+        onUpdateWinningMovie: ( winningMovieIndex: number ) => dispatch( Actions.updateWinningMovie( winningMovieIndex ))
     };
 }
 

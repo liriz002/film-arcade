@@ -22,8 +22,12 @@ Button:hover {
 }
 
 Button:disabled {
-    background-color: white;
-    cursor: not-allowed;
-    color: grey;
-    border: 1px solid grey;
+    background-color: white !important;
+    cursor: not-allowed !important;
+    color: grey !important;
+    border: 1px solid grey !important;
+}
+
+.Hide {
+    display: none;
 }

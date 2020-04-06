@@ -24,12 +24,18 @@ const NavigationBar = ( props: any ) => {
                     <img id="Logo-Image" src="https://image.flaticon.com/icons/svg/2148/2148668.svg" />
                     <h3 id="App-Title">HOME THEATER ARCADE</h3>
                 </span>
-            <Button id="Voting-Btn" clicked={ showSuddenDeathModal } classes="Button1" title="Sudden Death" />
-            <Button id="Filters-Button" clicked={ showGenresModal } classes="Button1" title="Filter Genres" />
+            <Button id="Voting-Btn" clicked={ showSuddenDeathModal } classes={ "Button1" + ( props.movies.length == 0 ? ' Hide' : '' ) } title="Sudden Death" />
+            <Button id="Filters-Button" clicked={ showGenresModal } classes={ "Button1" + ( props.movies.length == 0 ? ' Hide' : '' ) }  title="Filter Genres" disabled={  props.movies.length == 0} />
             </div>
        </div>
     );
 };
+
+function mapStateToProps( state: any ) {
+    return {
+        movies: state.movieData.movies
+    };
+}
 
 function mapDispatchToProps( dispatch: any ) {
     return {
@@ -38,4 +44,4 @@ function mapDispatchToProps( dispatch: any ) {
     };
 }
 
-export default connect( null, mapDispatchToProps )( NavigationBar );
+export default connect( mapStateToProps, mapDispatchToProps )( NavigationBar );

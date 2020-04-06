@@ -6,7 +6,7 @@ const initialGlobalProps = {
     showGenresModal: false,
     showMovieModal: false,
     showSuddenDeathModal: false,
-    showStreamingInfoModal: true,
+    showStreamingInfoModal: false,
     currentMovieIndex: 0,
     winningMovieIndex: -1,
     inSuddenDeath: false

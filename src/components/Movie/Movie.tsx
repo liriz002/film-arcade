@@ -26,6 +26,10 @@ const Movie = ( props: any ) => {
         props.onUpdateShowMovieModal( false );
     };
 
+    const showStreamingInfoModal = () => {
+        props.onUpdateShowStreamingInfoModal( true );
+    };
+
     // If the user clicked on Home or if there are no movies, we return to the homepage
     if ( state.goHome || props.movies.length == 0 ) {
         return (
@@ -35,8 +39,6 @@ const Movie = ( props: any ) => {
 
     let movieIndex = props.movieIndex;
     let currentMovie = props.movies[ movieIndex ];
-    console.log(movieIndex);
-    console.log(currentMovie);
 
     // const animatedProps = useSpring({ opacity: 1, from: { opacity: 0 } })
 
@@ -99,6 +101,7 @@ const Movie = ( props: any ) => {
                         <p id="Runtime">{ Functions.getHoursAndMinutesFromMinutes( currentMovie.runtime ) }</p>
                         <p id="Movie-Overview">{ currentMovie.overview }</p>
                         <a href={ currentMovie.trailerURL } target="_blank"><button id="Trailer-Button">Watch Trailer</button></a>
+                        <Button id="Streaming-Info-Btn" clicked={ showStreamingInfoModal } title="Streaming Info" />
                     </div>
                 </animated.div>
 
@@ -124,6 +127,7 @@ function mapStateToProps( state: any ){
 function mapDispatchToProps( dispatch: any ) {
     return {
         onUpdateShowMovieModal: ( show: boolean ) => dispatch( actions.updateShowMovieModal( show )),
+        onUpdateShowStreamingInfoModal: ( show: boolean ) => dispatch( actions.updateShowStreamingInfoModal( show ))
     };
 };
 

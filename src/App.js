@@ -69,6 +69,7 @@ const App = ( props ) => {
           </Route>
           <Route path="/winner">
             <Winner />
+            <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ true } />
           </Route>
           <Route path="/winner" component={ Winner } />
           <Route path="/">
@@ -79,7 +80,7 @@ const App = ( props ) => {
             <GenresModal isOpen={ props.showGenresModal } />
             <SuddenDeathModal isOpen={ props.showSuddenDeathModal } />
             <FullModal isOpen={ props.showMovieModal } />
-            <StreamingInfo isOpen={ props.showStreamingInfoModal } />
+            <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ false } />
             </div>
           </Route>
         </Switch>
