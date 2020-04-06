@@ -54,7 +54,7 @@
 .Genre-Container {
     width: 20%;
     display: inline-block;
-    margin: 0px 3px 0 3px;
+    margin: 0px 5px 0 5px;
 }
 
 .ReactModal__Overlay {
@@ -80,15 +80,161 @@ opacity: 0;
   left: 50% !important;
   top: 50% !important;
   transform: translate(-50%, -50%) !important;
+  padding: 0px !important;
+  border: none !important;
 }
 
 #Genres-Modal {
     background-color: #fafafa !important;
-    width: 33%;
-    height: 400px;
+    width: 380px;
+    height: 470px;
+}
+
+#Genres-Modal, #Sudden-Death-Modal, #Streaming-Info-Modal {
+    border-radius: 20px !important;
+    background-color: #fafafa !important;
 }
 
 #Full-Modal {
     height: 100vh;
     width: 100%;
+}
+
+.Modal-Title-Container {
+    background-image: linear-gradient(to right, #53f, #0BD1FF);
+    color: white;
+    font-weight: bold;
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.Modal-Title-Container h2 {
+    text-transform: uppercase;
+}
+
+#Sudden-Death-Modal {
+    width: 575px;
+    height: 450px;
+}
+
+.Modal-Content-Container {
+    padding: 0px 20px;
+    margin-top: 20px;
+}
+
+.Modal-Section h3 {
+    color: #525f7f;
+    margin-bottom: 7px;
+}
+
+.Modal-Section p {
+    margin-top: 0px;
+}
+
+.Modal-Right-Btn {
+    float: right;
+    margin-top: 8px;
+    margin-right: 16px;   
+}
+
+.Modal-Btn-Container {
+    width: 100%;
+    margin-left: auto;
+}
+
+.Close-Modal-Icon {
+    height: 30px;
+    width: auto;
+}
+
+.Close-Modal-Icon-Container {
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    right: 17px;
+}
+
+.Genre-Row {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+#Streaming-Info-Modal {
+    height: 445px;
+    width: 400px;
+}
+
+.Streaming-Poster-Image {
+    height: 250px;
+    width: auto;
+    border-radius: 10px;
+}
+
+#Streaming-Poster-Container {
+    width: 30%;
+    display: inline-block;
+}
+
+#Streaming-Details-Container {
+    width: 50%;
+    margin-left: 50px;
+    float: right;
+
+}
+
+#Streaming-Provider-Icon {
+    width: 50px;
+    height: auto;
+    border-radius: 10px;
+}
+
+#Streaming-Price {
+    color: grey;
+    margin-left: auto;
+    color: black;
+    font-size: 14px;
+}
+
+#Streaming-Type {
+    background-color: #ffc107;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+}
+
+#Streaming-Table {
+    width: 100%;
+    position: relative;
+    bottom: 2px;
+}
+
+#Streaming-Price-Icon {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-top: none;
+    border-radius: 5px;
+    position: relative;
+    bottom: 6px;
+    padding: 13px 20px 10px 20px;
+    cursor: pointer;
+
+}
+
+#Streaming-Divider {
+    position: relative;
+    left: 20px;
+    font-weight: bold;
+    color: lightgrey;
+    font-size: 1.5em;
+}
+
+#Price-Guarantee {
+    font-size: 10px;
+    color: grey;
+    margin-top: 5px;
 }

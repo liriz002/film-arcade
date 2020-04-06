@@ -43,3 +43,25 @@
     text-transform: uppercase;
     font-size: 2.0em;
 }
+
+.Movie-Counter {
+    position: absolute;
+    right: 1%;
+    bottom: 2%;
+    font-weight: bold;
+}
+
+.Movie-Counter-Current {
+    color: white;
+    font-size: 1.25em;
+}
+
+.Movie-Counter-Divider {
+    color: grey;
+    margin: 5px;
+}
+
+.Movie-Counter-Total {
+    color: #1daafc;
+    font-size: 1.25em;
+}

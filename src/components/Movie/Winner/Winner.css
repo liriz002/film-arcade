@@ -1,0 +1,29 @@
+#Winner-Poster {
+    height: 75vh;
+    width: auto;
+    border-radius: 10px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#Animation-1 {
+    position: absolute;
+    top: 30%;
+    right: 5%;
+}
+
+#Animation-2 {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+}
+
+#Rent-Buy-Btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3%;
+}

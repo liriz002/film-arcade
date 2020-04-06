@@ -34,7 +34,7 @@ class Timer extends Component<Props, State> {
 
     // Reduces a second from the timer countdown. If it reaches 0, we stop the timer
     tick = () => {
-        if ( this.state.secondsLeft == 0 ) {
+        if ( this.state.secondsLeft == 1 ) {
             { this.props.onTick() }
             clearInterval( this.timerID );
         } else {

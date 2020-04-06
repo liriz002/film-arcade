@@ -5,8 +5,11 @@ const initialGlobalProps = {
     counter: 0,
     showGenresModal: false,
     showMovieModal: false,
+    showSuddenDeathModal: false,
+    showStreamingInfoModal: true,
     currentMovieIndex: 0,
-    winningMovieIndex: -1
+    winningMovieIndex: -1,
+    inSuddenDeath: false
 };
 
 const globalProps = ( state = initialGlobalProps, action: any ) => {
@@ -19,6 +22,12 @@ const globalProps = ( state = initialGlobalProps, action: any ) => {
             return { ...state, showMovieModal: action.show };
         case Actions.UPDATE_WINNING_MOVIE:
             return { ...state, winningMovieIndex: action.winningMovieIndex };
+        case Actions.UPDATE_SHOW_SUDDEN_DEATH_MODAL:
+            return { ...state, showSuddenDeathModal: action.show };
+        case Actions.START_SUDDEN_DEATH:
+            return { ...state, showSuddenDeathModal: false, inSuddenDeath: true };
+        case Actions.UPDATE_SHOW_STREAMING_INFO_MODAL:
+            return { ...state, showStreamingInfoModal: action.show };
         default:
             return state;
     }

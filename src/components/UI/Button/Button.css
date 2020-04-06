@@ -2,11 +2,12 @@ Button {
     font-weight: bold;
     text-transform: uppercase;
     padding: 15px 15px;
-    width: 160px;
+    width: 170px;
     border-radius: 20px;
-    font-family: 'Poppins';
+    font-family: 'Quicksand';
     border: none;
     outline: 0;
+    font-size: 13px;
 }
 
 Button:hover {
@@ -18,4 +19,11 @@ Button:hover {
 .Button1 {
     background-color: #1daafc;
     color: white;
+}
+
+Button:disabled {
+    background-color: white;
+    cursor: not-allowed;
+    color: grey;
+    border: 1px solid grey;
 }

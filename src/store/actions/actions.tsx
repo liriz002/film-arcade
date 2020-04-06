@@ -6,6 +6,9 @@ export const UPDATE_FILTER_STRING = 'UPDATE_FILTER_STRING';
 export const UPDATE_SHOULD_APPLY_FILTER = 'UPDATE_SHOULD_APPLY_FILTER';
 export const UPDATE_VOTING_MOVIES = 'UPDATE_VOTING_MOVIES';
 export const UPDATE_WINNING_MOVIE = 'UPDATE_WINNING_MOVIE';
+export const UPDATE_SHOW_SUDDEN_DEATH_MODAL = 'UPDATE_SHOW_SUDDEN_DEATH_MODAL';
+export const START_SUDDEN_DEATH = 'START_SUDDEN_DEATH';
+export const UPDATE_SHOW_STREAMING_INFO_MODAL = 'UPDATE_SHOW_STREAMING_INFO_MODAL';
 
 export function updateShowGenresModal( show: boolean ) {
     return {
@@ -64,3 +67,23 @@ export function updateWinningMovie( winningMovieIndex: number ) {
         winningMovieIndex: winningMovieIndex
     };
 }
+
+export function updateShowSuddenDeathModal( show: boolean ) {
+    return {
+        type: UPDATE_SHOW_SUDDEN_DEATH_MODAL,
+        show: show
+    };
+}
+
+export function startSuddenDeath() {
+    return {
+        type: START_SUDDEN_DEATH
+    };
+}
+
+export function updateShowStreamingInfoModal( show: boolean ) {
+    return {
+        type: UPDATE_SHOW_STREAMING_INFO_MODAL,
+        show: show
+    };
+};

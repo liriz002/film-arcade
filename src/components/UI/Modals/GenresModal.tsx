@@ -7,35 +7,53 @@ import { connect } from 'react-redux';
 import './Modals.css';
 import * as Constants from '../../../utils/constants';
 import * as Actions from '../../../store/actions/actions';
-import { bindActionCreators } from 'redux';
 
 const GenresModal = ( props: any ) => {
-
     const saveGenres = () => {
-
         props.onUpdateShouldApplyFilter( true );
         props.onUpdateShowGenresModal( false );
     };
 
-    const addGenre = () => {
-        console.log('added genre');
-    };
+    const closeModal = () => {
+        props.onUpdateFilterString( '' );
+        props.onUpdateShowGenresModal( false );
+    }
+
+    const getNumOfGenresSelected = () => {
+        return props.filterString.split("|").length - 1
+    }
 
     return (
         <ReactModal id="Genres-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS }>
-        <h2>What's for tonight?</h2>
+            <div className="Modal-Title-Container">
+                <h2>What's for tonight?</h2>
+            </div>
 
-        <div id="All-Genres-Container">
-            { Constants.ALL_GENRES.map(( genre, index ) => {
-                return (
-                    <span className="Genre-Container">
-                        <Genre key={ genre } name={ genre } isSelected={ props.filterString.includes( genre ) } clicked={ addGenre } />
-                    </span>
-                );
-            }) }
+        <div className="Modal-Content-Container">
+            <div id="All-Genres-Container">
+                <div className="Genre-Row">
+                    <Genre key={ "Action" } name={ "Action" } isSelected={ props.filterString.includes( "Action" ) } />
+                    <Genre key={ "Adventure" } name={ "Adventure" } isSelected={ props.filterString.includes( "Adventure" ) } />
+                    <Genre key={ "Animation" } name={ "Animation" } isSelected={ props.filterString.includes( "Animation" ) } />
+                    <Genre key={ "Comedy" } name={ "Comedy" } isSelected={ props.filterString.includes( "Comedy" ) } />
+                </div>
+                <div className="Genre-Row">
+                    <Genre key={ "Crime" } name={ "Crime" } isSelected={ props.filterString.includes( "Crime" ) } />
+                    <Genre key={ "Drama" } name={ "Drama" } isSelected={ props.filterString.includes( "Drama" ) } />
+                    <Genre key={ "Family" } name={ "Family" } isSelected={ props.filterString.includes( "Family" ) } />
+                    <Genre key={ "Fantasy" } name={ "Fantasy" } isSelected={ props.filterString.includes( "Fantasy" ) } />
+                </div>
+                <div className="Genre-Row">
+                    <Genre key={ "Horror" } name={ "Horror" } isSelected={ props.filterString.includes( "Horror" ) } />
+                    <Genre key={ "Romance" } name={ "Romance" } isSelected={ props.filterString.includes( "Romance" ) } />
+                    <Genre key={ "Science Fiction" } name={ "Science Fiction" } isSelected={ props.filterString.includes( "Science Fiction" ) } />
+                    <Genre key={ "Thriller" } name={ "Thriller" } isSelected={ props.filterString.includes( "Thriller" ) }  />
+                </div>
+            </div>
+            <hr />
           </div>
 
-          <Button clicked={ saveGenres } classes="Button1" title={ ( props.filterString == '' ) ? 'All Genres' : 'Apply Genres' } />
+          <Button classes="Button Modal-Right-Btn Button1" title={ ( props.filterString == '' ) ? 'All Genres' : ( 'Apply ' + getNumOfGenresSelected() + ' Genre' + ( getNumOfGenresSelected() > 1 ? 's' : '' )) } clicked={ saveGenres }></Button>
         </ReactModal>
     );
 };
@@ -50,7 +68,8 @@ function mapStateToProps( state: any ) {
 function mapDispatchToProps( dispatch: any ) {
     return {
         onUpdateShowGenresModal: ( show: any ) => dispatch({ type: Actions.UPDATE_SHOW_GENRES_MODAL, show: show }),
-        onUpdateShouldApplyFilter: ( shouldApplyFilter: boolean ) => dispatch( Actions.updateShouldApplyFilter( shouldApplyFilter ) )
+        onUpdateShouldApplyFilter: ( shouldApplyFilter: boolean ) => dispatch( Actions.updateShouldApplyFilter( shouldApplyFilter ) ),
+        onUpdateFilterString: ( filterStr: string ) => dispatch( Actions.updateFilterString( filterStr ) )
     };
 }
 

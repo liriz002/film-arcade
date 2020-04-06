@@ -8,8 +8,10 @@ import PostersContainer from './components/Movie/PostersContainer/PostersContain
 import GenresModal from './components/UI/Modals/GenresModal';
 import NavigationBar from './components/UI/NavigationBar/NavigationBar';
 import FullModal from './components/UI/Modals/FullModal';
+import SuddenDeathModal from './components/UI/Modals/SuddenDeathModal';
+import StreamingInfo from './components/UI/Modals/StreamingInfo';
 import Voting from './containers/Voting/Voting';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'; 
+import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom'; 
 
 import './App.css';
 
@@ -48,15 +50,21 @@ const App = ( props ) => {
     }
   });
 
+
+  let redirectToSuddenDeath;
+  if ( props.inSuddenDeath ) {
+      redirectToSuddenDeath = <Redirect to="/sudden-death" />
+  }
+
   return (
 
     <Router>
     <div className="App">
-      <div className="">
+        { redirectToSuddenDeath }
         <Switch>
           <Route path="/movie">
           </Route>
-          <Route path="/movies-voting">
+          <Route path="/sudden-death">
             <Voting />
           </Route>
           <Route path="/winner">
@@ -67,13 +75,14 @@ const App = ( props ) => {
           <NavigationBar isOpen={ !props.showMovieModal } />
             <div id="Home">
             <PostersContainer title="At-Theater" movies={ props.atTheaterMovies } />
-            <PostersContainer title="Recently Left Theaters" movies={ props.leftTheaterMovies } />
+            <PostersContainer title="Just Left Theaters" movies={ props.leftTheaterMovies } />
             <GenresModal isOpen={ props.showGenresModal } />
+            <SuddenDeathModal isOpen={ props.showSuddenDeathModal } />
             <FullModal isOpen={ props.showMovieModal } />
+            <StreamingInfo isOpen={ props.showStreamingInfoModal } />
             </div>
           </Route>
         </Switch>
-      </div>
     </div>
 
     </Router>
@@ -85,17 +94,21 @@ function mapStateToProps( state ) {
     counter: state.globalProps.counter,
     showGenresModal: state.globalProps.showGenresModal,
     showMovieModal: state.globalProps.showMovieModal,
+    showSuddenDeathModal: state.globalProps.showSuddenDeathModal,
+    showStreamingInfoModal: state.globalProps.showStreamingInfoModal,
     movies: state.movieData.movies,
     atTheaterMovies: state.movieData.atTheaterMovies,
     leftTheaterMovies: state.movieData.leftTheaterMovies,
     shouldApplyFilter: state.movieData.shouldApplyFilter,
-    filterString: state.movieData.filterString
+    filterString: state.movieData.filterString,
+    inSuddenDeath: state.globalProps.inSuddenDeath
   };  
 }
 
 function mapDispatchToProps( dispatch ) {
   return {
     onUpdateShowGenresModal: ( show ) => dispatch( actions.updateShowGenresModal( show ) ),
+    onUpdateShowSuddenDeathModal: ( show ) => dispatch( actions.updateShowSuddenDeathModal( show ) ),
     onUpdateMovies: ( movies, atTheaterMovies, leftTheaterMovies ) => dispatch( actions.updateMovies( movies, atTheaterMovies, leftTheaterMovies ) ),
     onUpdateShouldApplyFilter: ( shouldApplyFilter ) => dispatch( actions.updateShouldApplyFilter( shouldApplyFilter ) )
   };

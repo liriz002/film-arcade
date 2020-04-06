@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as Constants from '../../utils/constants';
 import * as Actions from '../../store/actions/actions';
 
+import { Animation } from '../../components/Lottie/Winner/Winner';
+
 import './Voting.css';
 
 const Voting = ( props: any ) => {
@@ -86,23 +88,34 @@ const Voting = ( props: any ) => {
         } else {
             let leftProps = { alt: '', src: '', background: '' }
             let rightProps = { alt: '', src: '', background: '' }
+            let leftMovie;
+            let rightMovie;
 
             if ( sideToRefresh == "" ) {
+                leftMovie = props.votingMovies[ 0 ];
+                rightMovie = props.votingMovies[ 1 ];
+
                 // If we are on the first pass, we assign the attributes of the first and second movie, accordingly
-                leftProps = { alt: "left-0", src: props.votingMovies[ 0 ].posterURL, background: props.votingMovies[ 0 ].backdropImageURL };
-                rightProps = { alt: "right-1", src: props.votingMovies[ 1 ].posterURL, background: props.votingMovies[ 1 ].backdropImageURL }
+                leftProps = { alt: "left-" + leftMovie.id, src: leftMovie.posterURL, background: leftMovie.backdropImageURL };
+                rightProps = { alt: "right-" + rightMovie.id, src: rightMovie.posterURL, background: rightMovie.backdropImageURL }
             } else {
                 // We are not on the first pass and the user has voted, so we only update one of the sides
                 if ( sideToRefresh == "left" ) {
+                    leftMovie = props.votingMovies[ latestMovieShownIndex ];
+                    rightMovie = props.allMovies[ winningMovieIndex ];
+
                     // Updating left-hand side
-                    leftProps = { alt: "left-" + latestMovieShownIndex, src: props.votingMovies[ latestMovieShownIndex ].posterURL, background: props.votingMovies[ latestMovieShownIndex ].backdropImageURL }
+                    leftProps = { alt: "left-" + leftMovie.id, src: leftMovie.posterURL, background: leftMovie.backdropImageURL }
                     // We keep the right-hand side the same
-                    rightProps = { alt: "right-" + winningMovieIndex, src: props.votingMovies[ winningMovieIndex ].posterURL, background: props.votingMovies[ winningMovieIndex ].backdropImageURL }
+                    rightProps = { alt: "right-" + winningMovieIndex, src: rightMovie.posterURL, background: rightMovie.backdropImageURL }
                 } else {
+                    rightMovie = props.votingMovies[ latestMovieShownIndex ];
+                    leftMovie = props.allMovies[ winningMovieIndex ];
+
                     // Updating right-hand side
-                    rightProps = { alt: "right-" + latestMovieShownIndex, src: props.votingMovies[ latestMovieShownIndex ].posterURL, background: props.votingMovies[ latestMovieShownIndex ].backdropImageURL }
+                    rightProps = { alt: "right-" + rightMovie.id, src: rightMovie.posterURL, background: rightMovie.backdropImageURL }
                     // We keep the left-hand side the same
-                    leftProps = { alt: "left-" + winningMovieIndex, src: props.votingMovies[ winningMovieIndex ].posterURL, background: props.votingMovies[ winningMovieIndex ].backdropImageURL }
+                    leftProps = { alt: "left-" + winningMovieIndex, src: leftMovie.posterURL, background: leftMovie.backdropImageURL }
                 }
             }
             
@@ -136,6 +149,8 @@ const Voting = ( props: any ) => {
                         </div>
                     </div>
                 </div>
+
+            <span className="Movie-Counter"><span className="Movie-Counter-Current">{ latestMovieShownIndex + 1 }</span><span className="Movie-Counter-Divider">/</span><span className="Movie-Counter-Total">{ props.votingMovies.length }</span></span>
             </div>
         }
     }
@@ -149,6 +164,7 @@ const Voting = ( props: any ) => {
 
 function mapStateToProps( state: any ) {
     return {
+        allMovies: state.movieData.movies,
         votingMovies: state.movieData.votingMovies
     };
 }
