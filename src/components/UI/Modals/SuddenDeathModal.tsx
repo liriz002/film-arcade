@@ -57,8 +57,8 @@ const SuddenDeathModal = ( props: any ) => {
             <div className="Modal-Btn-Container">
                 <div>
                     <Button classes="Button Modal-Right-Btn Button1" title="Both" clicked={ selectBothMovieSets } disabled={ ( props.leftTheaterMovies.length + props.atTheaterMovies.length < 2 ) || props.leftTheaterMovies.length === 0 || props.atTheaterMovies.length === 0 ? true : false } ></Button>
-                    <Button classes="Button Modal-Right-Btn Button2" title="Latest Only" clicked={ selectLeftTheatersOnly } disabled={ ( props.leftTheaterMovies.length < 2 ) ? true : false }></Button>
-                    <Button classes="Button Modal-Right-Btn Button3" title="At-Theater Only" clicked={ selectAtTheatersOnly } disabled={ ( props.atTheaterMovies.length < 2 ) ? true : false } ></Button>
+                    <Button classes="Button Modal-Right-Btn Button2" title="Won't-Break-Bank" clicked={ selectLeftTheatersOnly } disabled={ ( props.leftTheaterMovies.length < 2 ) ? true : false }></Button>
+                    <Button classes="Button Modal-Right-Btn Button3" title="Theater-At-Home" clicked={ selectAtTheatersOnly } disabled={ ( props.atTheaterMovies.length < 2 ) ? true : false } ></Button>
                 </div>
             </div>
         </ReactModal>

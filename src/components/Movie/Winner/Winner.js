@@ -12,6 +12,8 @@ import './Winner.css';
 const Winner = ( props ) => {
     const [ playFirstAnimation, setPlayFirstAnimation ] = useState( false );
     const [ playSecondAnimation, setPlaySecondAnimation ] = useState( false );
+    const [ redirectHome, setRedirectHome ] = useState( false );
+
     const winner = props.movies[ props.winningMovieIndex ];
     let audio = new Audio('/sounds/winner.wav');
 
@@ -32,7 +34,7 @@ const Winner = ( props ) => {
     }, []);
 
     // If there's not a winning movie, we redirect to the homepage
-    if ( props.movies.length === 0 || props.winningMovieIndex === -1 ) {
+    if ( props.movies.length === 0 || props.winningMovieIndex === -1 || redirectHome ) {
         return (
             <Redirect to="/" />
         )
@@ -45,6 +47,11 @@ const Winner = ( props ) => {
         props.onUpdateShowStreamingInfoModal( true );
     }
 
+    const goToHome = () => {
+        props.onExitSuddenDeath();
+        setRedirectHome( true );
+    };
+
     return (
         <div>
             <div className="Movie-Backdrop" id="Winner-Backdrop" style={ { 
@@ -53,12 +60,16 @@ const Winner = ( props ) => {
                 backgroundImage: Constants.CSS.MOVIE_DARK_GRADIENTS +  'url(' + winner.backdropImageURL + ')'
             }}>
                 <div className="Movie-Backdrop-Overlay">
-                    <h2 id="Enjoy-Show-Header">Enjoy the show!</h2>
+                     <Motion defaultStyle={{ opacity: 0 }  } style={ { opacity: spring(1) } }>
+                    { style => (
+                        <h2 style={{ opacity: style.opacity }} id="Enjoy-Show-Header">Enjoy the show!</h2>
+                    )}
+                    </Motion>
                     { playFirstAnimation ? <Animation id="Animation-1" /> : '' }
                     { playSecondAnimation ? <Animation id="Animation-2" /> : '' }
                     <Motion defaultStyle={{ opacity: 0, x: -100, y: -50 }  } style={ { opacity: spring(1), x: spring( -50, Constants.Animations.STIFFNESS_DAMPING  ), y: -50 } }>
                     { style => (
-                    <div class="Winner-Poster-Container" style={{ opacity: style.opacity, transform: `translate(${style.x}%, ${style.y}%)` }}>
+                    <div className="Winner-Poster-Container" style={{ opacity: style.opacity, transform: `translate(${style.x}%, ${style.y}%)` }}>
                         <img alt={ winner.title } id="Winner-Poster" src={ winner.posterURL } />
                     </div>
                     )}
@@ -66,7 +77,10 @@ const Winner = ( props ) => {
 
                     <Motion defaultStyle={{ opacity: 0, bottom: -3 }  } style={ { opacity: spring(1), bottom: spring( 3, Constants.Animations.STIFFNESS_DAMPING  ) } }>
                     { style => (
-                        <Button style={{ transform: `translate(${ style.bottom }%)` }} id="Rent-Buy-Btn" classes="Button3" title="Stream" clicked={ showStreamingInfoModal } />
+                        <div id="Winner-Btns-Container">
+                            <Button style={{ transform: `translate(${ style.bottom }%)` }} classes="Button1" title="Home" clicked={ goToHome } />
+                            <Button style={{ transform: `translate(${ style.bottom }%)` }} classes="Button3" title="Stream" clicked={ showStreamingInfoModal } />
+                        </div>
                     )}
                     </Motion>
                 </div>
@@ -85,7 +99,8 @@ function mapStateToProps( state ) {
 function mapDispatchToProps( dispatch ) {
     return {
         onUpdateCurrentMovieIndex: ( movieIndex ) => dispatch( Actions.updateCurrentMovieIndex( movieIndex )),
-        onUpdateShowStreamingInfoModal: ( show ) => dispatch( Actions.updateShowStreamingInfoModal( show ))
+        onUpdateShowStreamingInfoModal: ( show ) => dispatch( Actions.updateShowStreamingInfoModal( show )),
+        onExitSuddenDeath: () => dispatch( Actions.exitSuddenDeath() )
     };
 }
 

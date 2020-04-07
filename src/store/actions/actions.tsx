@@ -9,6 +9,7 @@ export const UPDATE_WINNING_MOVIE = 'UPDATE_WINNING_MOVIE';
 export const UPDATE_SHOW_SUDDEN_DEATH_MODAL = 'UPDATE_SHOW_SUDDEN_DEATH_MODAL';
 export const START_SUDDEN_DEATH = 'START_SUDDEN_DEATH';
 export const UPDATE_SHOW_STREAMING_INFO_MODAL = 'UPDATE_SHOW_STREAMING_INFO_MODAL';
+export const EXIT_SUDDEN_DEATH = 'EXIT_SUDDEN_DEATH';
 
 export function updateShowGenresModal( show: boolean ) {
     return {
@@ -87,3 +88,9 @@ export function updateShowStreamingInfoModal( show: boolean ) {
         show: show
     };
 };
+
+export function exitSuddenDeath() {
+    return {
+        type: EXIT_SUDDEN_DEATH
+    };
+}

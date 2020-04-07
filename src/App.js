@@ -98,8 +98,8 @@ const App = ( props ) => {
           transform: `translateX(${style.x}px)`,
           opacity: style.opacity
         }}>
-          <PostersContainer title="At-Theater Digital Releases" movies={ props.atTheaterMovies } />
-          <PostersContainer title="Latest Digital Releases" movies={ props.leftTheaterMovies } />
+          <PostersContainer title="Theater-At-Home Releases" movies={ props.atTheaterMovies } />
+          <PostersContainer title="Won't-Break-Your-Bank Releases" movies={ props.leftTheaterMovies } />
         </div>
       )}
       </Motion>

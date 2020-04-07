@@ -28,6 +28,8 @@ const globalProps = ( state = initialGlobalProps, action: any ) => {
             return { ...state, showSuddenDeathModal: false, inSuddenDeath: true };
         case Actions.UPDATE_SHOW_STREAMING_INFO_MODAL:
             return { ...state, showStreamingInfoModal: action.show };
+        case Actions.EXIT_SUDDEN_DEATH:
+            return { ...state, inSuddenDeath: false };
         default:
             return state;
     }

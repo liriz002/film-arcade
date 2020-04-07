@@ -15,11 +15,7 @@ const StreamingInfo = ( props: any ) => {
     };
 
     const openURL = ( streamingURL: string ) => {
-        if ( props.redirect ) {
-            window.location.href = streamingURL;
-        } else {
-            window.open(streamingURL, '_blank');
-        }
+        window.open(streamingURL, '_blank');
     }
 
     if( props.movies.length === 0 ) {
