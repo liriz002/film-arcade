@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import * as Constants from '../../utils/constants';
-import { render } from '@testing-library/react';
 
 type Props = { onTick: Function }
 type State = { secondsLeft: number }
@@ -33,8 +32,8 @@ class Timer extends Component<Props, State> {
 
     // Reduces a second from the timer countdown. If it reaches 0, we stop the timer
     tick = () => {
-        if ( this.state.secondsLeft == 1 ) {
-            { this.props.onTick() }
+        if ( this.state.secondsLeft === 1 ) {
+            this.props.onTick()
             clearInterval( this.timerID );
         } else {
             this.setState({ secondsLeft: this.state.secondsLeft - 1 });

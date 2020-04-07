@@ -1,5 +1,5 @@
 .Navigation-Bar {
-    background-image: linear-gradient(to right, #53f, #0BD1FF);
+    background: #1F6097;
     padding: 15px 0px;
     height: 30px;
     position: absolute;
@@ -17,10 +17,8 @@
 #Filters-Button {
     float: right;
     position: relative;
-    right: 35px;
+    right: 40px;
     bottom: 8px;
-    background-color: #ffc107;
-    color: black;
 }
 
 #Voting-Btn {
@@ -28,8 +26,6 @@
     position: relative;
     right: 35px;
     bottom: 8px;
-    background-color: #4F43FF;
-    color: white;
     margin-right: 10px;
 }
 
@@ -42,9 +38,9 @@
 
 #App-Title {
     font-weight: bold;
-    text-transform: uppercase;
+    text-transform: capitalize;
     display: inline-block;
     position: relative;
-    bottom: 15px;
+    bottom: 17px;
     left: 15px;
 }

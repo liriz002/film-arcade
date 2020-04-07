@@ -2,7 +2,9 @@
     height: 75vh;
     width: auto;
     border-radius: 10px;
+}
 
+.Winner-Poster-Container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -11,8 +13,8 @@
 
 #Animation-1 {
     position: absolute;
-    top: 0%;
-    left: 5%;
+    top: 10%;
+    left: 2%;
 }
 
 #Animation-2 {
@@ -26,4 +28,15 @@
     left: 50%;
     transform: translate(-50%, 0);
     bottom: 3%;
+}
+
+#Winner-Backdrop {
+    height: 100vh;
+}
+
+#Enjoy-Show-Header {
+    position: absolute;
+    top: 1%;
+    left: 50%;
+    transform: translate(-50%, 0);
 }

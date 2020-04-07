@@ -24,7 +24,7 @@ const GenresModal = ( props: any ) => {
     }
 
     return (
-        <ReactModal id="Genres-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS }>
+        <ReactModal id="Genres-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } ariaHideApp={ false }>
             <div className="Modal-Title-Container">
                 <h2>What's for tonight?</h2>
             </div>
@@ -53,7 +53,7 @@ const GenresModal = ( props: any ) => {
             <hr />
           </div>
 
-          <Button classes="Button Modal-Right-Btn Button1" title={ ( props.filterString == '' ) ? 'All Genres' : ( 'Apply ' + getNumOfGenresSelected() + ' Genre' + ( getNumOfGenresSelected() > 1 ? 's' : '' )) } clicked={ saveGenres }></Button>
+          <Button classes="Button Modal-Right-Btn Button1" title={ ( props.filterString === '' ) ? 'All Genres' : ( 'Filter ' + getNumOfGenresSelected() + ' Genre' + ( getNumOfGenresSelected() > 1 ? 's' : '' )) } clicked={ saveGenres }></Button>
         </ReactModal>
     );
 };

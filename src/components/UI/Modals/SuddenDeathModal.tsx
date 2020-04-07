@@ -32,11 +32,11 @@ const SuddenDeathModal = ( props: any ) => {
     };
 
     return (
-        <ReactModal id="Sudden-Death-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS }>
+        <ReactModal id="Sudden-Death-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } ariaHideApp={ false }>
             <div className="Modal-Title-Container">
                 <h2>Sudden Death</h2>
                 <div className="Close-Modal-Icon-Container" onClick={ closeModal }>
-                    <img className="Close-Modal-Icon" src="https://image.flaticon.com/icons/svg/1632/1632600.svg" />
+                    <img alt="Close Icon" className="Close-Modal-Icon" src="/images/icons/cross.png" />
                 </div>
             </div>
             <div className="Modal-Content-Container">
@@ -50,15 +50,15 @@ const SuddenDeathModal = ( props: any ) => {
                 </div>
                 <div className="Modal-Section">
                     <h3>Time Limit</h3>
-                    <p>If you don't vote within the time limit, a vote will be cast randomly for you.</p>
+                    <p>If you don't vote within 5 seconds, a vote will be cast randomly for you.</p>
                 </div>
                 <hr />
             </div>
             <div className="Modal-Btn-Container">
                 <div>
-                    <Button classes="Button Modal-Right-Btn Button1" title="Both Movie Sets" clicked={ selectBothMovieSets } disabled={ ( props.leftTheaterMovies.length + props.atTheaterMovies.length < 2 ) ? true : false } ></Button>
-                    <Button classes="Button Modal-Right-Btn Button1" title="Left-Theaters Only" clicked={ selectLeftTheatersOnly } disabled={ ( props.leftTheaterMovies.length < 2 ) ? true : false }></Button>
-                    <Button classes="Button Modal-Right-Btn Button1" title="At-Theater Only" clicked={ selectAtTheatersOnly } disabled={ ( props.atTheaterMovies.length < 2 ) ? true : false } ></Button>
+                    <Button classes="Button Modal-Right-Btn Button1" title="Both" clicked={ selectBothMovieSets } disabled={ ( props.leftTheaterMovies.length + props.atTheaterMovies.length < 2 ) || props.leftTheaterMovies.length === 0 || props.atTheaterMovies.length === 0 ? true : false } ></Button>
+                    <Button classes="Button Modal-Right-Btn Button2" title="Latest Only" clicked={ selectLeftTheatersOnly } disabled={ ( props.leftTheaterMovies.length < 2 ) ? true : false }></Button>
+                    <Button classes="Button Modal-Right-Btn Button3" title="At-Theater Only" clicked={ selectAtTheatersOnly } disabled={ ( props.atTheaterMovies.length < 2 ) ? true : false } ></Button>
                 </div>
             </div>
         </ReactModal>

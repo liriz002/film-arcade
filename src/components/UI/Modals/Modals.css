@@ -9,11 +9,11 @@
 
 .Card {
     display: block;
-    padding: 10px;
+    padding: 8px;
     cursor: pointer;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     width: 60px;
     height: 60px;
     border-width: 2px;
@@ -23,8 +23,8 @@
 }
 
 .Card:hover {
-    transform: translateY(-3px);
-    transition: 0.4s transform;
+    transform: translateY(-2px);
+    transition: transform 0.1s;
 }
 
 .Genre-Image {
@@ -87,11 +87,11 @@ opacity: 0;
 #Genres-Modal {
     background-color: #fafafa !important;
     width: 380px;
-    height: 470px;
+    height: 435px;
 }
 
 #Genres-Modal, #Sudden-Death-Modal, #Streaming-Info-Modal, #Mobile-Modal {
-    border-radius: 20px !important;
+    border-radius: 10px !important;
     background-color: #fafafa !important;
 }
 
@@ -101,7 +101,7 @@ opacity: 0;
 }
 
 .Modal-Title-Container {
-    background-image: linear-gradient(to right, #53f, #0BD1FF);
+    background: #4F43FF;
     color: white;
     font-weight: bold;
     padding: 5px 20px;
@@ -115,7 +115,7 @@ opacity: 0;
 
 #Sudden-Death-Modal {
     width: 575px;
-    height: 450px;
+    height: 423px;
 }
 
 .Modal-Content-Container {
@@ -162,7 +162,7 @@ opacity: 0;
 }
 
 #Streaming-Info-Modal {
-    height: 445px;
+    height: 438px;
     width: 400px;
 }
 
@@ -234,7 +234,7 @@ opacity: 0;
 }
 
 #Price-Guarantee {
-    font-size: 10px;
+    font-size: 11px;
     color: grey;
     margin-top: 5px;
 }

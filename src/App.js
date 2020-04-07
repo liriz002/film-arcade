@@ -11,7 +11,9 @@ import MobileModal from './components/UI/Modals/MobileModal';
 import SuddenDeathModal from './components/UI/Modals/SuddenDeathModal';
 import StreamingInfo from './components/UI/Modals/StreamingInfo';
 import Voting from './containers/Voting/Voting';
+import Spinner from './components/UI/Spinner/Spinner';
 import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom'; 
+import { Motion, spring } from 'react-motion';
 
 import * as Constants from './utils/constants';
 
@@ -30,7 +32,7 @@ const App = ( props ) => {
       let allLeftTheaterMovies = allMovies.splice( 0 );
 
       // If the filter string is empty, we show all genres to the user
-      if( props.filterString == "" ) {
+      if( props.filterString === "" ) {
         props.onUpdateMovies( props.movies, allAtTheaterMovies, allLeftTheaterMovies );
       } else {
           // Else, we have a filter to apply, so we apply the genre(s) filter to both lists
@@ -74,42 +76,64 @@ const App = ( props ) => {
   }
 
   let mainApp;
+  // If the width is too small, we just show the modal
   if ( windowWidth < Constants.Global.MIN_WINDOW_WIDTH ) {
     mainApp = 
-    <div className="App">
-     <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
-    </div>
+      <div className="App">
+        <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
+      </div>
   } else {
+    // Otherwise, we show regular content
+
+    // If we have no movies yet, we show a spinning icon
+    let movies;
+    if ( props.movies.length === 0 ) {
+      movies = <Spinner />
+    } else {
+      // Otherwise, we animate the poster containers
+      movies =
+      <Motion key={ props.shouldApplyFilter } defaultStyle={{ x: -400, opacity: 0 }  } style={ { x: spring(0, Constants.Animations.STIFFNESS_DAMPING ), opacity: spring(1) } }>
+      { style => (
+        <div style={{
+          transform: `translateX(${style.x}px)`,
+          opacity: style.opacity
+        }}>
+          <PostersContainer title="At-Theater Digital Releases" movies={ props.atTheaterMovies } />
+          <PostersContainer title="Latest Digital Releases" movies={ props.leftTheaterMovies } />
+        </div>
+      )}
+      </Motion>
+    }
+    
+    // Finally, we build the main HTML
     mainApp = 
     <Router>
-    <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
-    <div className="App">
-        { redirectToSuddenDeath }
-        <Switch>
-          <Route path="/movie">
-          </Route>
-          <Route path="/sudden-death">
-            <Voting />
-          </Route>
-          <Route path="/winner">
-            <Winner />
-            <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ true } />
-          </Route>
-          <Route path="/winner" component={ Winner } />
-          <Route path="/">
-          <NavigationBar isOpen={ !props.showMovieModal } />
-            <div id="Home">
-            <PostersContainer title="At-Theater" movies={ props.atTheaterMovies } />
-            <PostersContainer title="Just Left Theaters" movies={ props.leftTheaterMovies } />
-            <GenresModal isOpen={ props.showGenresModal } />
-            <SuddenDeathModal isOpen={ props.showSuddenDeathModal } />
-            <FullModal isOpen={ props.showMovieModal } />
-            <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ false } />
-            </div>
-          </Route>
-        </Switch>
-    </div>
-
+      <MobileModal isOpen={ windowWidth < Constants.Global.MIN_WINDOW_WIDTH } />
+      <div className="App">
+          { redirectToSuddenDeath }
+          <Switch>
+            <Route path="/movie">
+            </Route>
+            <Route path="/sudden-death">
+              <Voting />
+            </Route>
+            <Route path="/winner">
+              <Winner />
+              <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ true } />
+            </Route>
+            <Route path="/winner" component={ Winner } />
+            <Route path="/">
+            <NavigationBar isOpen={ !props.showMovieModal } />
+              <div id="Home">
+              { movies }
+              <GenresModal isOpen={ props.showGenresModal } />
+              <SuddenDeathModal isOpen={ props.showSuddenDeathModal } />
+              <FullModal isOpen={ props.showMovieModal } />
+              <StreamingInfo isOpen={ props.showStreamingInfoModal } redirect={ false } />
+              </div>
+            </Route>
+          </Switch>
+      </div>
     </Router>
   }
 
@@ -145,8 +169,4 @@ function mapDispatchToProps( dispatch ) {
   };
 }
 
-
 export default connect( mapStateToProps, mapDispatchToProps )( App );
-
-
-//             <FullModal />

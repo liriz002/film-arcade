@@ -1,4 +1,4 @@
-import { put, takeEvery, all } from 'redux-saga/effects';
+import { put, all } from 'redux-saga/effects';
 import * as actions from '../store/actions/actions';
 
 // const delay = ( ms: number ) => new Promise( res => setTimeout( res, ms ) );
@@ -19,13 +19,10 @@ export function *fetchMovies() {
     let leftTheater = allMovies.splice( 0 );
 
     yield put({ type: actions.UPDATE_MOVIES, movies: moviesJSON, atTheaterMovies: atTheater, leftTheaterMovies: leftTheater });
-    // yield put({ type: actions.UPDATE_VOTING_MOVIES, movies: moviesJSON }); // TODO: this will change from here to select not all movies but appropriate movies for voting (e.g. if there's a filter)
 }
 
 export default function *rootSaga() {
     yield all([
-        //helloSaga(),
-        //watchIncrementAsync(),
         fetchMovies()
     ]);
 }

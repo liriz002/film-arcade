@@ -7,6 +7,8 @@ body {
 
 #Home {
   margin-top: 60px;
+  padding-top: 1%;
+  padding-left: 2%;
 }
 
 code {
@@ -19,25 +21,4 @@ code {
 #root {
   color: white;
   background-color: #032541;
-  /*
-  background: url('https://i.imgur.com/tcgVHdh.png');
-  height: 100vh;
-  background-position: 0px 0px;
-  background-repeat: repeat;
-  background-size: cover;
-
-
-    animation: animatedBackground 60s linear infinite;
-    */
 }
-
-/*
-@keyframes animatedBackground {
-  from {
-    background-position: 0% 0;
-  }
-  to {
-    background-position: 100% 0;
-  }
-}
-*/

@@ -22,7 +22,7 @@ const StreamingInfo = ( props: any ) => {
         }
     }
 
-    if( props.movies.length == 0 ) {
+    if( props.movies.length === 0 ) {
         return (
             <Redirect to="/" />
         );
@@ -32,30 +32,30 @@ const StreamingInfo = ( props: any ) => {
     let currentMovie = props.movies[ movieIndex ];
 
     return (
-        <ReactModal id="Streaming-Info-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } >
+        <ReactModal id="Streaming-Info-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } ariaHideApp={ false } >
             <div className="Modal-Title-Container">
                 <h2>Streaming Info</h2>
             </div>
             <div className="Modal-Content-Container">
                 <div className="Modal-Section">
                     <div id="Streaming-Poster-Container">
-                    <img className="Streaming-Poster-Image" src={ currentMovie.posterURL } />
+                    <img alt={ currentMovie.title } className="Streaming-Poster-Image" src={ currentMovie.posterURL } />
                     </div>
                     <div id="Streaming-Details-Container">
                         <table id="Streaming-Table">
                             <thead>
-                                <tr><td id="Streaming-Type">{ currentMovie.reactStreaming.type == 'Rent' ? 'For Rent' : 'For Purchase' }</td></tr>
+                                <tr><td id="Streaming-Type">{ currentMovie.reactStreaming.type === 'Rent' ? 'For Rent' : 'For Purchase' }</td></tr>
                             </thead>
                             <tbody>
                                 <td id="Streaming-Price-Icon" onClick={(  ) => openURL( currentMovie.reactStreaming.URL ) }>
-                                    <img id="Streaming-Provider-Icon" src={ Functions.getProviderImageURL( currentMovie.reactStreaming.provider ) } />
+                                    <img alt={ currentMovie.reactStreaming.provider } id="Streaming-Provider-Icon" src={ Functions.getProviderImageURL( currentMovie.reactStreaming.provider ) } />
                                     <span id="Streaming-Divider">/</span>
                                     <span id="Streaming-Price">${ currentMovie.reactStreaming.price }</span>
                                     </td>
                             </tbody>
                         </table>
 
-                        <p id="Price-Guarantee">* Sometimes, the lowest price is for standard definition. If you're interested in better definitions, look through the different options in the streaming provider.</p>
+                        <p id="Price-Guarantee">Sometimes, this lowest price is for standard definition. If you're interested in better definitions, look through the different options in the streaming provider's site.</p>
 
                     </div>
                 </div>

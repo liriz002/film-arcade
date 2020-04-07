@@ -1,25 +1,48 @@
 Button {
     font-weight: bold;
-    text-transform: uppercase;
-    padding: 15px 15px;
-    width: 170px;
-    border-radius: 20px;
+    text-transform: capitalize;
+    padding: 12px 0px;
+    width: 130px;
+    border-radius: 3px;
     font-family: 'Quicksand';
     border: none;
     outline: 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 Button:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    transition: 0.4s transform;
+    transition: transform 0.1s;
 }
 
 .Button1 {
-    background-color: #1daafc;
-    color: white;
+    background-color: #ffc107;
+    color: black;
 }
+
+.Button2 {
+    background-color: #D7385E;
+    color: white; 
+}
+
+.Button3 {
+    background-color: #4F43FF;
+    color: white
+}
+
+.Button4 {
+    background: transparent;
+    border: 1px solid lightgrey;
+    color: lightgrey;
+}
+
+.Button4:hover {
+    border: 1px solid #ffc107;
+    color: #ffc107;
+    transform: none;
+}
+
 
 Button:disabled {
     background-color: white !important;

@@ -16,7 +16,7 @@ export const getHoursAndMinutesFromMinutes = ( totalMinutes: number ) => {
     str += hours + "h";
 
     // If the minutes are not 0, we add them to the return string
-    if ( minutes != 0 ) {
+    if ( minutes !== 0 ) {
         str += " " + minutes + "m";
     }
 

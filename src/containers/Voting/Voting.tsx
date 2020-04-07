@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Timer from '../../components/Timer/Timer'; 
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Motion, spring } from 'react-motion';
 
 import * as Constants from '../../utils/constants';
 import * as Actions from '../../store/actions/actions';
-
-import { Animation } from '../../components/Lottie/Winner/Winner';
 
 import './Voting.css';
 
@@ -17,14 +16,13 @@ const Voting = ( props: any ) => {
     const [ sideToRefresh, updateSideToRefresh ] = useState( "" );
     const [ latestMovieShownIndex, updateLatestMovieShownIndex ] = useState( 1 );
     const [ winningMovieIndex, updateWinningMovieIndex ] = useState( 0 );
-    const [ leftProps, updateLeftProps ] = useState({ alt: '', src: '', background: '' });
-    const [ rightProps, updateRightProps ] = useState({ alt: '', src: '', background: '' });
     const [ showTimer, updateShowTimer ] = useState( true );
+
 
     const completeVote = ( event: any ) => {
         const [ sideClicked, winningIndex ] = event.target.alt.split("-");
 
-        updateSideToRefresh( sideClicked == "right" ? "left" : "right" );
+        updateSideToRefresh( sideClicked === "right" ? "left" : "right" );
         updateLatestMovieShownIndex( latestMovieShownIndex + 1 )
         updateWinningMovieIndex( winningIndex );
         updateShowTimer( false );
@@ -39,7 +37,7 @@ const Voting = ( props: any ) => {
     const timerTicked = () => {
         let randomInt = Math.round(Math.random());
         
-        if ( randomInt == 0 ) {
+        if ( randomInt === 0 ) {
             leftMovieRef.current.click();
         } else {
             rightMovieRef.current.click();
@@ -56,9 +54,9 @@ const Voting = ( props: any ) => {
 
     // Votes with the keyboard
     const handleKeyboardVote = ( e: any ) => {
-        if ( e.keyCode == 37 ) {
+        if ( e.keyCode === 37 ) {
             leftMovieRef.current.click();
-        } else if ( e.keyCode == 39 ) {
+        } else if ( e.keyCode === 39 ) {
             rightMovieRef.current.click();
         }
     };
@@ -71,13 +69,13 @@ const Voting = ( props: any ) => {
     }
 
     // If there are no movies to vote for, we return, as the user should not be here
-    if ( props.votingMovies.length == 0 ) {
+    if ( props.votingMovies.length === 0 ) {
         return (
             <Redirect to="/" />
         )
     } else {
 
-        if ( latestMovieShownIndex == props.votingMovies.length ) {
+        if ( latestMovieShownIndex === props.votingMovies.length ) {
             // If we reached the last movie, we are done, so we update the state to reflect we have a winning movie
             props.onUpdateWinningMovie( winningMovieIndex );
 
@@ -91,7 +89,7 @@ const Voting = ( props: any ) => {
             let leftMovie;
             let rightMovie;
 
-            if ( sideToRefresh == "" ) {
+            if ( sideToRefresh === "" ) {
                 leftMovie = props.votingMovies[ 0 ];
                 rightMovie = props.votingMovies[ 1 ];
 
@@ -100,7 +98,7 @@ const Voting = ( props: any ) => {
                 rightProps = { alt: "right-" + rightMovie.id, src: rightMovie.posterURL, background: rightMovie.backdropImageURL }
             } else {
                 // We are not on the first pass and the user has voted, so we only update one of the sides
-                if ( sideToRefresh == "left" ) {
+                if ( sideToRefresh === "left" ) {
                     leftMovie = props.votingMovies[ latestMovieShownIndex ];
                     rightMovie = props.allMovies[ winningMovieIndex ];
 
@@ -128,16 +126,21 @@ const Voting = ( props: any ) => {
             }}>
                 { timer }
     
-                <div className="Movie-Voting-Container Left-Movie" style={ { 
-                    backgroundSize: 'cover',
-                    backgroundImage: Constants.CSS.MOVIE_DARK_GRADIENTS +  'url(' + leftProps.background + ')'
-                    }}>
-                    <div className="Movie-Backdrop-Overlay">
-                        <div className="Movie-Voting-Details">
-                            <img id="Left-Movie" onClick={ completeVote } alt={ leftProps.alt } className="Movie-Voting-Poster" src={ leftProps.src } ref={ leftMovieRef } />
+                    <div className="Movie-Voting-Container Left-Movie" style={ { 
+                        backgroundSize: 'cover',
+                        backgroundImage: Constants.CSS.MOVIE_DARK_GRADIENTS +  'url(' + leftProps.background + ')'
+                        }}>
+                        <div className="Movie-Backdrop-Overlay">
+                            <div className="Movie-Voting-Details">
+                            <Motion key={ leftProps.alt } defaultStyle={{ opacity: 0, x: -400 }  } style={ { opacity: spring( 1 ), x: spring( 0, Constants.Animations.STIFFNESS_DAMPING  ) } }>
+                             { style => (
+                                <img id="Left-Movie" style={{ opacity: style.opacity, transform: `translatex(${style.x}px)`}} onClick={ completeVote } alt={ leftProps.alt } className="Movie-Voting-Poster" src={ leftProps.src } ref={ leftMovieRef } />
+                                )}
+                            </Motion>
+                            </div>
                         </div>
                     </div>
-                </div>
+
                 <div className="Movie-Voting-Container Right-Movie" style={ { 
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
@@ -145,7 +148,11 @@ const Voting = ( props: any ) => {
                 }}>
                     <div className="Movie-Backdrop-Overlay">
                         <div className="Movie-Voting-Details">
-                            <img id="Right-Movie" onClick={ completeVote } alt={ rightProps.alt } className="Movie-Voting-Poster" src={ rightProps.src } ref={ rightMovieRef } />
+                        <Motion key={ rightProps.alt } defaultStyle={{ opacity: 0, x: 400 }  } style={ { opacity: spring(1), x: spring( 0, Constants.Animations.STIFFNESS_DAMPING  ) } }>
+                         { style => (
+                            <img id="Right-Movie" style={{ opacity: style.opacity, transform: `translatex(${style.x}px)`}} onClick={ completeVote } alt={ rightProps.alt } className="Movie-Voting-Poster" src={ rightProps.src } ref={ rightMovieRef } />
+                         )}
+                        </Motion>
                         </div>
                     </div>
                 </div>
@@ -176,3 +183,28 @@ function mapDispatchToProps( dispatch: any ) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Voting);
+
+/*
+
+
+
+                <Motion key={ leftProps.alt } defaultStyle={{ opacity: 0 }  } style={ { opacity: spring(1) } }>
+                { style => (
+                    <div className="Movie-Voting-Container Left-Movie" style={ { 
+                        backgroundSize: 'cover',
+                        backgroundImage: Constants.CSS.MOVIE_DARK_GRADIENTS +  'url(' + leftProps.background + ')',
+                        opacity: style.opacity
+                        }}>
+                        <div className="Movie-Backdrop-Overlay">
+                            <div className="Movie-Voting-Details">
+                                <img id="Left-Movie" onClick={ completeVote } alt={ leftProps.alt } className="Movie-Voting-Poster" src={ leftProps.src } ref={ leftMovieRef } />
+
+                
+                            </div>
+                        </div>
+                    </div>
+                )}
+                </Motion>
+
+
+*/

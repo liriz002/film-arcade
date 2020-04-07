@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ReactLottieConfig, Lottie } from "@crello/react-lottie";
+import React from "react";
+import { Lottie } from "@crello/react-lottie";
 import animationData from "./winner.json";
 
 export const Animation = ( props ) => {

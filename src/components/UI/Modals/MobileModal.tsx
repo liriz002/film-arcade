@@ -4,7 +4,7 @@ import * as Constants from '../../../utils/constants';
 
 const MobileModal = ( props: any ) => {
     return (
-        <ReactModal id="Mobile-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS }>
+        <ReactModal id="Mobile-Modal" isOpen={ props.isOpen } closeTimeoutMS={ Constants.Global.MODALS_ANIMATION_TIME_IN_MS } ariaHideApp={ false }>
             <div className="Modal-Title-Container">
                 <h2>You Shall Not Pass</h2>
             </div>

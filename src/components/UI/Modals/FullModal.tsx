@@ -6,7 +6,7 @@ import Movie from '../../Movie/Movie';
 const FullModal = ( props: any ) => {
     return (
         <div>
-            <ReactModal id="Full-Modal" isOpen={ props.isOpen } closeTimeoutMS={ 500 }>
+            <ReactModal id="Full-Modal" isOpen={ props.isOpen } closeTimeoutMS={ 500 } ariaHideApp={ false }>
                 <Movie />
             </ReactModal>
         </div>

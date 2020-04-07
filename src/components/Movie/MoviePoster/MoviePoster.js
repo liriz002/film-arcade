@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import * as Actions from '../../../store/actions/actions';
 
 import './MoviePoster.css';
 
 const MoviePoster = ( props ) => {
-    // const [state, setState] = useState({ shouldRedirect: false, movieIndex: 0 });
-
     // Redirects to the movie details page, passing the movie's index
     const redirectToMovieDetails = ( e ) => {
-        // setState({ shouldRedirect: true, movieIndex: e.target.id });
         props.onUpdateShowMovieModal( true );
         props.onUpdateCurrentMovieIndex( e.target.id );
     }
 
     return (
         <div>
-            <img className="Movie-Poster" id={ props.id } src={ props.URL } onClick={ redirectToMovieDetails } />
+            <img alt={ props.id } className="Movie-Poster" id={ props.id } src={ props.URL } onClick={ redirectToMovieDetails } />
         </div>
     );
 };

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useSpring, animated as a } from 'react-spring';
 
 import * as Functions from '../../utils/functions';
-import * as Constants from '../../utils/constants';
 import * as actions from '../../store/actions/actions';
 import './Genre.css';
 
@@ -25,7 +23,7 @@ const Genre = ( props: any ) => {
 
     return (
         <span className={ "Card " + ( isSelected ? "Selected-Card" : "Unselected-Card" )} onClick={ toggleSelected }>
-             <img className="Genre-Image " src={ Functions.getGenreImageURL( props.name, isSelected ) } />
+             <img alt={ props.name } className="Genre-Image " src={ Functions.getGenreImageURL( props.name, isSelected ) } />
              <div className="Genre-Label">{ props.name === "Science Fiction" ? "Sci-Fi" : props.name }</div>
         </span>
     );

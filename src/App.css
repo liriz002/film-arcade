@@ -1,10 +1,6 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background: url("https://www.toptal.com/designers/subtlepatterns/patterns/noisy_net.png");
+  background: url('https://www.toptal.com/designers/subtlepatterns/patterns/noisy_net.png');
   overflow-y: hidden;
-}
-
-#Home {
-  padding-left: 2%;
 }
